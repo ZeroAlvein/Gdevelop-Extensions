@@ -1,0 +1,209 @@
+{
+  "author": "",
+  "category": "General",
+  "extensionNamespace": "",
+  "fullName": "Number Formatter",
+  "gdevelopVersion": "",
+  "helpPath": "",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLW51bWVyaWMiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNCwxN1Y5SDJWN0g2VjE3SDRNMjIsMTVDMjIsMTYuMTEgMjEuMSwxNyAyMCwxN0gxNlYxNUgyMFYxM0gxOFYxMUgyMFY5SDE2VjdIMjBBMiwyIDAgMCwxIDIyLDlWMTAuNUExLjUsMS41IDAgMCwxIDIwLjUsMTJBMS41LDEuNSAwIDAsMSAyMiwxMy41VjE1TTE0LDE1VjE3SDhWMTNDOCwxMS44OSA4LjksMTEgMTAsMTFIMTJWOUg4VjdIMTJBMiwyIDAgMCwxIDE0LDlWMTFDMTQsMTIuMTEgMTMuMSwxMyAxMiwxM0gxMFYxNUgxNFoiIC8+PC9zdmc+",
+  "name": "Formatter",
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/3dcf4718854c4335dd1b2d0cad41b3ab1136f781a8c1424f893234a6d4e5cc38_numeric.svg",
+  "shortDescription": "Number formatting tool",
+  "version": "0",
+  "description": [
+    "Format numbers in various ways",
+    "",
+    "Usage ",
+    "Change text of text object set to Formatter and some options will appear",
+    "",
+    "Convert 1000 it will convert it to 1K",
+    "Add separator 123456789 you will get 123.456.789",
+    "Make blinking colon to display time in format like 10:25 10 25 each other second"
+  ],
+  "tags": [
+    "Number.Formatting.Separator.LargeNumber."
+  ],
+  "authorIds": [
+    "SoOZOqN0VgdXUsFHOtG7nUU2DNB2"
+  ],
+  "dependencies": [],
+  "globalVariables": [
+    {
+      "name": "SuffixVar",
+      "type": "array",
+      "children": [
+        {
+          "type": "string",
+          "value": "K"
+        },
+        {
+          "type": "string",
+          "value": "M"
+        },
+        {
+          "type": "string",
+          "value": "B"
+        },
+        {
+          "type": "string",
+          "value": "T"
+        },
+        {
+          "type": "string",
+          "value": "Qa"
+        },
+        {
+          "type": "string",
+          "value": "Qi"
+        }
+      ]
+    },
+    {
+      "name": "SeparatorVar",
+      "type": "string",
+      "value": ":"
+    },
+    {
+      "name": "CommaVar",
+      "type": "number",
+      "value": 0
+    }
+  ],
+  "sceneVariables": [],
+  "eventsFunctions": [
+    {
+      "description": "Format number into 1-3 digits with extra suffix            \nIf number is above 999                                                   \nWhile being able to show 1-3 decimal digits              \nSet decimal to 0 1 2 3 to control                                 \nHow many digits are shown in decimal\n                                                                                       \nYou have variable Score equal to 1234                     \nFormatter::FormatNumber(Score,\"\",0,\"\") = 1K\nFormatter::FormatNumber(Score,\".\",1,\"\") = 1.2K\nFormatter::FormatNumber(Score,\",\",3,\" \") = 1,234 K\nFormatter::FormatNumber(Score,\" . \",2,\"-\") = 1 . 23-K\n                                                                                       \nWhen large number is above 999                                     \nSecond separator and suffix will show automatically\nFirst separator when decimal is set to 1 or 2 or 3           \n                                                                                           \nScore = 987 654 321\nFormatter::FormatNumber(Score,\";\",0,\"-\") = 987-M\nFormatter::FormatNumber(Score,\";\",2,\"-\")  = 987;65-M    \nSet separator to \"\" to show nothing",
+      "fullName": "Format number with suffix",
+      "functionType": "StringExpression",
+      "name": "FormatNumber",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(FirstSeparator + SubStr(Number, 1, clamp(Decimal, 0, 3)), StrLength(SubStr(Number, 3, clamp(Decimal, 0, 1)))) + StrRepeat(SecondSeparator, StrLength(SubStr(Number, 3, 1))) + StrRepeat(SuffixVar[round((StrLength(Number) - 2) / 3) - 1], StrLength(SubStr(Number, 3, 1)))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Number",
+          "name": "Number",
+          "type": "expression"
+        },
+        {
+          "description": "First Separator",
+          "name": "FirstSeparator",
+          "type": "string"
+        },
+        {
+          "description": "Decimal",
+          "name": "Decimal",
+          "type": "expression"
+        },
+        {
+          "description": "Second Separator",
+          "name": "SecondSeparator",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Add separators to number between each 3 digits      \nFrom right to left if number is above 999                     \n                                                                                         \nFor example if variable Score = 12345678 \nFormatter::AddSeparator(Score, \".\") = 12.345.678      \nFormatter::AddSeparator(Score, \"_\") = 12_345_678      ",
+      "fullName": "Add separator",
+      "functionType": "StringExpression",
+      "name": "AddSeparator",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(Separator + SubStr(Number, 1 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 3, 1))) + StrRepeat(Separator + SubStr(Number, 4 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 6, 1))) + StrRepeat(Separator + SubStr(Number, 7 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 9, 1))) + StrRepeat(Separator + SubStr(Number, 10 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 12, 1))) + StrRepeat(Separator + SubStr(Number, 13 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 15, 1))) + StrRepeat(Separator + SubStr(Number, 16 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 18, 1)))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Number",
+          "name": "Number",
+          "type": "expression"
+        },
+        {
+          "description": "Separator",
+          "name": "Separator",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Create blinking separator (good for time formatting)\nFor example                                                                   \n                                                                                 \nToString(Time(\"hour\"))+Formatter::Blinker(Time(\"sec\"), \":\", \" \")+ToString(Time(\"min\"))\n                                        \n                                                                                               \nWill display 12:10 12 10 blinking each second                \nSo time of your device with blinking colon :       \nBetween hours and minutes",
+      "fullName": "Blinking Separator",
+      "functionType": "StringExpression",
+      "name": "Blinker",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(CommaOFF, mod(TimeInSeconds, 2)) + StrRepeat(CommaON, abs(mod(TimeInSeconds, 2) - 1))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "TimeInSeconds",
+          "name": "TimeInSeconds",
+          "type": "expression"
+        },
+        {
+          "description": "CommaOFF",
+          "name": "CommaOFF",
+          "type": "string"
+        },
+        {
+          "description": "CommaON",
+          "name": "CommaON",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    }
+  ],
+  "eventsBasedBehaviors": [],
+  "eventsBasedObjects": []
+}
