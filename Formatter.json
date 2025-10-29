@@ -1,17 +1,17 @@
 {
-  "author": "",
+  "author": "ZeroX4",
   "category": "General",
   "extensionNamespace": "",
-  "fullName": "Number Formatter",
+  "fullName": "Formatter",
   "gdevelopVersion": "",
   "helpPath": "",
   "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLW51bWVyaWMiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNCwxN1Y5SDJWN0g2VjE3SDRNMjIsMTVDMjIsMTYuMTEgMjEuMSwxNyAyMCwxN0gxNlYxNUgyMFYxM0gxOFYxMUgyMFY5SDE2VjdIMjBBMiwyIDAgMCwxIDIyLDlWMTAuNUExLjUsMS41IDAgMCwxIDIwLjUsMTJBMS41LDEuNSAwIDAsMSAyMiwxMy41VjE1TTE0LDE1VjE3SDhWMTNDOCwxMS44OSA4LjksMTEgMTAsMTFIMTJWOUg4VjdIMTJBMiwyIDAgMCwxIDE0LDlWMTFDMTQsMTIuMTEgMTMuMSwxMyAxMiwxM0gxMFYxNUgxNFoiIC8+PC9zdmc+",
   "name": "Formatter",
   "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/3dcf4718854c4335dd1b2d0cad41b3ab1136f781a8c1424f893234a6d4e5cc38_numeric.svg",
-  "shortDescription": "Number formatting tool",
+  "shortDescription": "Number formatting tool and more",
   "version": "0",
   "description": [
-    "Format numbers in various ways",
+    "Format numbers in various ways amd more",
     "",
     "Usage ",
     "Change text of text object set to Formatter and various options will appear",
@@ -21,7 +21,7 @@
     "Make blinking colon to display time in format like 10:25 10 25 each other second"
   ],
   "tags": [
-    "number.formatting.format.comma.separator.large number.time.second.minute.hour"
+    "number.formatting.format.comma.separator.large number.time.second.minute.hour.random word"
   ],
   "authorIds": [
     "SoOZOqN0VgdXUsFHOtG7nUU2DNB2"
@@ -57,26 +57,32 @@
           "value": "Qi"
         }
       ]
+    }
+  ],
+  "sceneVariables": [
+    {
+      "name": "Start",
+      "type": "number",
+      "value": 0
     },
     {
-      "name": "SeparatorVar",
-      "type": "string",
-      "value": ":"
+      "name": "End",
+      "type": "number",
+      "value": 0
     },
     {
-      "name": "CommaVar",
+      "name": "RNG",
       "type": "number",
       "value": 0
     }
   ],
-  "sceneVariables": [],
   "eventsFunctions": [
     {
-      "description": "Format number into 1-3 digits with extra suffix            \nIf number is above 999                                                   \nWhile being able to show 1-3 decimal digits              \nSet decimal to 0 1 2 3 to control                                 \nHow many digits are shown in decimal\n                                                                                       \nYou have variable Score equal to 1234                     \nFormatter::FormatNumber(Score,\"\",0,\"\") = 1K\nFormatter::FormatNumber(Score,\".\",1,\"\") = 1.2K\nFormatter::FormatNumber(Score,\",\",3,\" \") = 1,234 K\nFormatter::FormatNumber(Score,\" . \",2,\"-\") = 1 . 23-K\n                                                                                       \nWhen large number is above 999                                     \nSecond separator and suffix will show automatically\nFirst separator when decimal is set to 1 or 2 or 3           \n                                                                                           \nScore = 987 654 321\nFormatter::FormatNumber(Score,\";\",0,\"-\") = 987-M\nFormatter::FormatNumber(Score,\";\",2,\"-\")  = 987;65-M    \nSet separator to \"\" to show nothing",
-      "fullName": "Format number with suffix",
-      "functionType": "StringExpression",
-      "name": "FormatNumber",
-      "sentence": "",
+      "description": "Set suffix displayed after number",
+      "fullName": "Set suffix",
+      "functionType": "Action",
+      "name": "SetSuffix",
+      "sentence": "Set suffix of: Thousand  _PARAM1_, Million _PARAM2_, Trillion _PARAM3_, Billion _PARAM4_, Quadrillion _PARAM5_, Quintillion _PARAM6_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::Standard",
@@ -84,37 +90,102 @@
           "actions": [
             {
               "type": {
-                "value": "SetReturnString"
+                "value": "SetStringVariable"
               },
               "parameters": [
-                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(FirstSeparator+SubStr(Number,1+mod(StrLength(Number)-1,3),clamp(Decimal, 0, 3)),StrLength(SubStr(Number,3,clamp(Decimal, 0, 1)))) + StrRepeat(SecondSeparator, StrLength(SubStr(Number, 3, 1))) + StrRepeat(SuffixVar[round((StrLength(Number) - 2) / 3) - 1], StrLength(SubStr(Number, 3, 1)))"
+                "SuffixVar[0]",
+                "=",
+                "Thousand"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[1]",
+                "=",
+                "Million"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[2]",
+                "=",
+                "Billion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[3]",
+                "=",
+                "Trillion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[4]",
+                "=",
+                "Quadrillion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[5]",
+                "=",
+                "Quintillion"
               ]
             }
           ]
         }
       ],
-      "expressionType": {
-        "type": "string"
-      },
       "parameters": [
         {
-          "description": "Number",
-          "name": "Number",
-          "type": "expression"
-        },
-        {
-          "description": "First Separator",
-          "name": "FirstSeparator",
+          "description": "Thousand default K",
+          "name": "Thousand",
+          "supplementaryInformation": "[\"K\"]",
           "type": "string"
         },
         {
-          "description": "Decimal",
-          "name": "Decimal",
-          "type": "expression"
+          "description": "Million default M",
+          "name": "Million",
+          "supplementaryInformation": "[\"M\"]",
+          "type": "string"
         },
         {
-          "description": "Second Separator",
-          "name": "SecondSeparator",
+          "description": "Billion default B",
+          "name": "Billion",
+          "supplementaryInformation": "[\"B\"]",
+          "type": "string"
+        },
+        {
+          "description": "Trillion default T",
+          "name": "Trillion",
+          "supplementaryInformation": "[\"T\"]",
+          "type": "string"
+        },
+        {
+          "description": "Quadrillion default Qa",
+          "name": "Quadrillion",
+          "supplementaryInformation": "[\"Qa\"]",
+          "type": "string"
+        },
+        {
+          "description": "Quintillion default Qi",
+          "name": "Quintillion",
+          "supplementaryInformation": "[\"Qi\"]",
           "type": "string"
         }
       ],
@@ -160,7 +231,7 @@
       "objectGroups": []
     },
     {
-      "description": "Create blinking separator (good for time formatting)\nFor example                                                                   \n                                                                                 \nToString(Time(\"hour\"))+Formatter::Blinker(Time(\"sec\"), \":\", \" \")+ToString(Time(\"min\"))\n                                        \n                                                                                               \nWill display 12:10 12 10 blinking each second                \nSo time of your device with blinking colon :       \nBetween hours and minutes",
+      "description": "Create blinking separator (good for time formatting)\nFormatter::Blinker(Time(\"sec\"), \":\", \" \")                    \nFormatter::Blinker(YourSecondsTimeVariable, \":\", \" \")\n                                                                                             \nFor example                                                                   \nToString(Time(\"hour\"))+Formatter::Blinker(Time(\"sec\"), \":\", \" \")+ToString(Time(\"min\"))\n                                        \n                                                                                               \nWill display 12:10 and 12 10 blinking each other second\nUse Formatter::Time() to display already formated time",
       "fullName": "Blinking Separator",
       "functionType": "StringExpression",
       "name": "Blinker",
@@ -204,10 +275,170 @@
       "objectGroups": []
     },
     {
-      "description": "Display your device time in various formats\nFimeFormat can be 0 1 or 2                                               \n0 - HH                                                                                  \n1 - HH:MM                                                                          \n2 - HH:MM:SS                                                                    \n                                                                                       \nFor example                                                                     \nFormatter::DeviceTime(0,\":\",\" \") = 09                              \nFormatter::DeviceTime(1,\":\",\" \") = 09:21                        \nFormatter::DeviceTime(2,\":\",\" \") = 09:21:37                   \n                                                                                       \nSet both separators to same character to stop blinking\nFor example Formatter::DeviceTime(2,\":\",\":\")",
-      "fullName": "Device time",
+      "description": "Format number into 1-3 digits with extra suffix            \n                                                                                       \nYou have variable Score equal to 1234                     \nFormatter::FormatNumber(Score, \"\", 0, \"\") = 1K\nFormatter::FormatNumber(Score, \".\", 1, \"\") = 1.2K\nFormatter::FormatNumber(Score, \",\", 2, \" \") = 1,23 K\nFormatter::FormatNumber(Score, \" . \", 3, \"-\") = 1 . 234-K\n                                                                                       \nScore = 987 654 321                                                  \nFormatter::FormatNumber(Score, \";\", 0, \"-\") = 987-M\nFormatter::FormatNumber(Score, \";\", 2, \"-\")  = 987;65-M  \nSet separator to \"\" to show nothing\n                                                                                           \nTo change suffix like K M B T to k m b t or whatever  \nOpen extension and go to FormatNumber function",
+      "fullName": "Format number with suffix",
       "functionType": "StringExpression",
-      "name": "DeviceTime",
+      "name": "FormatNumber",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Comment",
+          "color": {
+            "b": 0,
+            "g": 0,
+            "r": 0,
+            "textB": 255,
+            "textG": 255,
+            "textR": 255
+          },
+          "comment": "SuffixVar 0 = K       1 000\nSuffixVar 1 = M       1 000 000\nSuffixVar 2 = B        1 000 000 000\nSuffixVar 3 = T         1 000 000 000 000\nSuffixVar 4 = Qa       1 000 000 000 000 000\nSuffixVar 5 = Qi         1 000 000 000 000 000 000"
+        },
+        {
+          "disabled": true,
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[0]",
+                "=",
+                "\"K\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[1]",
+                "=",
+                "\"M\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[2]",
+                "=",
+                "\"B\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[3]",
+                "=",
+                "\"T\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[4]",
+                "=",
+                "\"Qa\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[5]",
+                "=",
+                "\"Qi\""
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "SuffixVar",
+              "type": "array",
+              "children": [
+                {
+                  "type": "string",
+                  "value": "K"
+                },
+                {
+                  "type": "string",
+                  "value": "M"
+                },
+                {
+                  "type": "string",
+                  "value": "B"
+                },
+                {
+                  "type": "string",
+                  "value": "T"
+                },
+                {
+                  "type": "string",
+                  "value": "Qa"
+                },
+                {
+                  "type": "string",
+                  "value": "Qi"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(FirstSeparator+SubStr(Number,1+mod(StrLength(Number)-1,3),clamp(Decimal, 0, 3)),StrLength(SubStr(Number,3,clamp(Decimal, 0, 1)))) + StrRepeat(SecondSeparator, StrLength(SubStr(Number, 3, 1))) + StrRepeat(SuffixVar[round((StrLength(Number) - 2) / 3) - 1], StrLength(SubStr(Number, 3, 1)))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Number",
+          "name": "Number",
+          "type": "expression"
+        },
+        {
+          "description": "First Separator",
+          "name": "FirstSeparator",
+          "type": "string"
+        },
+        {
+          "description": "Decimal",
+          "name": "Decimal",
+          "type": "expression"
+        },
+        {
+          "description": "Second Separator",
+          "name": "SecondSeparator",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Displays your game frames per second FPS                     \nFor example Formatter::FPS()                                           \n                                                                                               \nOr to be more fancy                                                         \n\"FPS \"+Formatter::FPS()                                                  ",
+      "fullName": "Display FPS",
+      "functionType": "StringExpression",
+      "name": "FPS",
       "sentence": "",
       "events": [
         {
@@ -219,8 +450,126 @@
                 "value": "SetReturnString"
               },
               "parameters": [
-                "StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(TimeFormat, 0, 1)) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(TimeFormat - 1, 0, 1))"
+                "ToString(round(1/TimeDelta()))"
               ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Get random word from string of words                          \nLike Minecraft splash word\n                                                                                             \nEach word needs to be separated by ONE comma \nFormatter::RandomWord(\"Cat.Dog.Cow.\")\nFormatter::RandomWord(\"Sky.Boat.Tank.Ship\")",
+      "fullName": "Random word",
+      "functionType": "StringExpression",
+      "name": "RandomWord",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "RNG",
+                "=",
+                "RandomInRange(0,StrFindLast(WordsString,\".\"))"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "Start",
+                "=",
+                "StrFindFrom(\".\"+WordsString,\".\",RNG)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "End",
+                "=",
+                "StrFindFrom(WordsString+\".\",\".\",Start+1)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(\".\"+WordsString+\".\", Start + 1,End - Start)"
+              ]
+            },
+            {
+              "type": {
+                "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+              },
+              "parameters": [
+                "",
+                "",
+                "=",
+                "Formatter::RandomWord()"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "WordsString",
+          "name": "WordsString",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Display your device time in various formats                   \n                                                                                             \nIf time is 09 : 15 : 42 AM then                                          \nFormatter::Time(0, 0, \":\", \" \", \"\", \"\") = 09                            \nFormatter::Time(1, 1, \":\", \" \", \"\", \"\") = 9:15                          \nFormatter::Time(0, 2, \":\", \" \", \"\", \"\") = 09:15:42                \nFormatter::Time(2, 1, \":\", \" \", \"AM\", \"PM\") = 09:15AM         \nFormatter::Time(3, 1, \":\", \" \", \"AM\", \"PM\") = 9:15AM          \n                                                                                             \nIf time is 09 : 15 : 42 PM then                                             \nFormatter::Time(0, 1, \":\", \" \", \"\", \"\") = 21:15                         \nFormatter::Time(2, 1, \":\", \" \", \"\", \"\") = 21:15                         \nFormatter::Time(2, 2, \":\", \" \", \"AM\", \"PM\") = 09:15:42PM   \nFormatter::Time(2, 1, \":\", \" \", \"am\", \"pm\") = 09:15pm     \nFormatter::Time(3, 1, \":\", \" \", \" AM\", \" PM\") = 9:15 PM     \n                                                                                             \nSet separators to \" \" to have space between numbers\nFormatter::Time(0, 1, \" \", \" \", \"\", \"\")                                   \n                                                                                             \nSet separators to same character to stop bliinking      \nFormatter::Time(0, 1, \":\", \":\", \"\", \"\")                                   ",
+      "fullName": "Device time",
+      "functionType": "StringExpression",
+      "name": "Time",
+      "sentence": "",
+      "events": [
+        {
+          "folded": true,
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))+StrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))+StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))+StrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))+StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))+StrRepeat(AM,clamp(12-Time(\"hour\"),0,1))+StrRepeat(PM,clamp(Time(\"hour\")-11,0,1))"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 0,
+                "g": 0,
+                "r": 0,
+                "textB": 255,
+                "textG": 255,
+                "textR": 255
+              },
+              "comment": "0 digit if 24H format 0\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))\n\nNO 0 digit if 24H format 1\nStrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))\n\n0 digit if 12H format 2\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3\nStrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))\n\nMinutes\nStrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))\n\n\nAM\nStrRepeat(AM,clamp(12-Time(\"hour\"),0,1))\n\nPM\nStrRepeat(PM,clamp(Time(\"hour\")-11,0,1))"
             }
           ]
         }
@@ -235,6 +584,11 @@
           "type": "expression"
         },
         {
+          "description": "Length",
+          "name": "Length",
+          "type": "expression"
+        },
+        {
           "description": "SeparatorOFF",
           "name": "SeparatorOFF",
           "type": "string"
@@ -242,6 +596,16 @@
         {
           "description": "SeparatorON",
           "name": "SeparatorON",
+          "type": "string"
+        },
+        {
+          "description": "AM",
+          "name": "AM",
+          "type": "string"
+        },
+        {
+          "description": "PM",
+          "name": "PM",
           "type": "string"
         }
       ],
