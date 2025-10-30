@@ -59,7 +59,7 @@
       ]
     },
     {
-      "name": "Time",
+      "name": "TimeAmPmSuffix",
       "type": "structure",
       "children": [
         {
@@ -71,6 +71,57 @@
           "name": "PM",
           "type": "string",
           "value": "PM"
+        }
+      ]
+    },
+    {
+      "name": "TimeInGame",
+      "type": "structure",
+      "children": [
+        {
+          "name": "AM",
+          "type": "string",
+          "value": "AM"
+        },
+        {
+          "name": "Hour",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "Length",
+          "type": "number",
+          "value": 1
+        },
+        {
+          "name": "Minutes",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "PM",
+          "type": "string",
+          "value": "PM"
+        },
+        {
+          "name": "Seconds",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "SeparatorOFF",
+          "type": "string",
+          "value": ":"
+        },
+        {
+          "name": "SeparatorON",
+          "type": "string",
+          "value": ":"
+        },
+        {
+          "name": "TimeFormat",
+          "type": "number",
+          "value": 0
         }
       ]
     }
@@ -97,7 +148,7 @@
       "description": "Set large number suffix",
       "fullName": "Set large number suffix",
       "functionType": "Action",
-      "name": "SetSuffix",
+      "name": "SetLargeNumberSuffix",
       "sentence": "Set number suffix of: Thousand to _PARAM1_, Million to _PARAM2_, Trillion to _PARAM3_, Billion to _PARAM4_, Quadrillion to _PARAM5_, Quintillion to _PARAM6_",
       "events": [
         {
@@ -211,8 +262,8 @@
       "description": "Set time AM PM suffix",
       "fullName": "Set time AM PM suffix",
       "functionType": "Action",
-      "name": "SetTime",
-      "sentence": "Set time suffix of AM to _PARAM1_, PM to _PARAM2_",
+      "name": "SetDeviceTimeSuffix",
+      "sentence": "Set time AM suffix to _PARAM1_, PM suffix to _PARAM2_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::Standard",
@@ -223,7 +274,7 @@
                 "value": "SetStringVariable"
               },
               "parameters": [
-                "Time.AM",
+                "TimeAmPmSuffix.AM",
                 "=",
                 "AM"
               ]
@@ -233,7 +284,7 @@
                 "value": "SetStringVariable"
               },
               "parameters": [
-                "Time.PM",
+                "TimeAmPmSuffix.PM",
                 "=",
                 "PM"
               ]
@@ -250,6 +301,329 @@
         {
           "description": "Default PM",
           "name": "PM",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Set in game time formatting",
+      "fullName": "Set in game time formatting",
+      "functionType": "Action",
+      "name": "SetGameTime",
+      "sentence": "Set in game time formatting for time format _PARAM1_, extra 0 in front of hour _PARAM2_, time length  _PARAM3_, separator ON _PARAM4_ OFF _PARAM5_, AM_PARAM6_  PM _PARAM7_ suffix ",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "TimeFormat",
+                "=",
+                "\"24h\""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "0"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "1"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "TimeFormat",
+                "=",
+                "\"12h\""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "2"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "3"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "0"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour : Minutes\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour : Minutes : Seconds\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "2"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.SeparatorOFF",
+                "=",
+                "SeparatorON"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.SeparatorON",
+                "=",
+                "SeparatorOFF"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.AM",
+                "=",
+                "InGameAM"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.PM",
+                "=",
+                "InGamePM"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Time format",
+          "name": "TimeFormat",
+          "supplementaryInformation": "[\"24h\",\"12h\"]",
+          "type": "stringWithSelector"
+        },
+        {
+          "defaultValue": "yes",
+          "description": "Add extra 0 in front of hour if hour is below 10",
+          "name": "ExtraZero",
+          "optional": true,
+          "supplementaryInformation": "[\"Yes\",\"No\"]",
+          "type": "yesorno"
+        },
+        {
+          "description": "Length",
+          "name": "Length",
+          "supplementaryInformation": "[\"Hour\",\"Hour : Minutes\",\"Hour : Minutes : Seconds\"]",
+          "type": "stringWithSelector"
+        },
+        {
+          "description": "SeparatorON",
+          "name": "SeparatorON",
+          "type": "string"
+        },
+        {
+          "description": "SeparatorOFF",
+          "name": "SeparatorOFF",
+          "type": "string"
+        },
+        {
+          "description": "AM suffix",
+          "name": "InGameAM",
+          "type": "string"
+        },
+        {
+          "description": "PM suffix",
+          "name": "InGamePM",
           "type": "string"
         }
       ],
@@ -492,8 +866,52 @@
       "objectGroups": []
     },
     {
-      "description": "Display your device time in various formats\n                                                                                             \nIf time is 09 : 15 : 42 AM then                                          \nFormatter::Time(0, 0, \":\", \" \") = 09                            \nFormatter::Time(1, 1, \":\", \" \") = 9:15                          \nFormatter::Time(0, 2, \":\", \" \") = 09:15:42                \nFormatter::Time(2, 1, \":\", \" \") = 09:15AM         \nFormatter::Time(3, 1, \" \", \" \") = 9 15AM\n                                                                                             \nIf time is 09 : 15 : 42 PM then                                             \nFormatter::Time(0, 1, \":\", \" \") = 21:15                         \nFormatter::Time(2, 1, \"-\", \" \") = 21-15                         \nFormatter::Time(2, 2, \" \", \" \") = 09 15 42PM   \nFormatter::Time(2, 1, \":\", \" \") = 09:15PM     \nFormatter::Time(3, 1, \":\", \" \") = 9:15AM     \n                                                                                             \nSet separators to \" \" to have space between numbers\nFormatter::Time(0, 1, \" \", \" \")                                   \n                                                                                             \nSet separators to same character to stop bliinking      \nFormatter::Time(0, 1, \":\", \":\")                                            \n                                                                                                \nTo change AM PM use action Set time AM PM suffix        \nOr open extension and edit it in global variables",
-      "fullName": "Device time",
+      "description": "Display your game time in various formats                   \nAdd action called Set in game time formatting             \nWhole configuration is there                                           \nHere you only provide your hour minutes and seconds",
+      "fullName": "Display in game time",
+      "functionType": "StringExpression",
+      "name": "GameTime",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(trunc(Hour)))) + ToString(trunc(Hour)), min((TimeInGame.TimeFormat + 1) - 0, 1) + min((TimeInGame.TimeFormat - 0) * -1, 0)) + StrRepeat(ToString(trunc(Hour)), min((TimeInGame.TimeFormat + 1) - 1, 1) + min((TimeInGame.TimeFormat - 1) * -1, 0)) + StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(trunc(Hour) - 1, 12) + 1))) + ToString(mod(trunc(Hour) - 1, 12) + 1), min((TimeInGame.TimeFormat + 1) - 2, 1) + min((TimeInGame.TimeFormat - 2) * -1, 0)) + StrRepeat(ToString(mod(trunc(Hour) - 1, 12) + 1), min((TimeInGame.TimeFormat + 1) - 3, 1) + min((TimeInGame.TimeFormat - 3) * -1, 0)) + StrRepeat(StrRepeat(TimeInGame.SeparatorON, abs(mod(trunc(trunc(Seconds)), 2) - 1)) + StrRepeat(TimeInGame.SeparatorOFF, mod(trunc(trunc(Seconds)), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(trunc(Minutes)))) + ToString(trunc(Minutes)), clamp(TimeInGame.Length, 0, 1)) + StrRepeat(StrRepeat(TimeInGame.SeparatorON, abs(mod(trunc(trunc(Seconds)), 2) - 1)) + StrRepeat(TimeInGame.SeparatorOFF, mod(trunc(trunc(Seconds)), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(trunc(trunc(Seconds))))) + ToString(trunc(trunc(Seconds))), clamp(TimeInGame.Length - 1, 0, 1)) + StrRepeat(StrRepeat(TimeInGame.AM, clamp(12 - trunc(Hour), 0, 1)) + StrRepeat(TimeInGame.PM, clamp(trunc(Hour) - 11, 0, 1)), clamp(TimeInGame.TimeFormat - 1, 0, 1))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Hour",
+          "name": "Hour",
+          "type": "expression"
+        },
+        {
+          "description": "Minutes",
+          "name": "Minutes",
+          "type": "expression"
+        },
+        {
+          "description": "Seconds",
+          "name": "Seconds",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Display your device time in various formats               \n══════════════════════════════════╣\nIf time is 09 : 15 : 42 AM then                                            \nFormatter::Time(0, 0, \":\", \" \") = 09                         \nFormatter::Time(1, 1, \":\", \" \") = 9:15                          \nFormatter::Time(0, 2, \":\", \" \") = 09:15:42                \nFormatter::Time(2, 1, \":\", \" \") = 09:15AM         \nFormatter::Time(3, 1, \" \", \" \") = 9 15AM\n                                                                                             \nIf time is 09 : 15 : 42 PM then                                             \nFormatter::Time(0, 1, \":\", \" \") = 21:15                    \nFormatter::Time(2, 1, \"-\", \" \") = 21-15                    \nFormatter::Time(2, 2, \" \", \" \") = 09 15 42PM   \nFormatter::Time(2, 1, \":\", \" \") = 09:15PM     \nFormatter::Time(3, 1, \":\", \" \") = 9:15AM     \n                                                                                             \nSet separators to \" \" to have space between numbers\nFormatter::Time(0, 1, \" \", \" \")\n                                                                                             \nSet separators to same character to stop bliinking      \nFormatter::Time(0, 1, \":\", \":\")\n                                                                                             \nTo change AM PM use action Set time AM PM suffix        \nOr open extension and edit it in global variables",
+      "fullName": "Display device time",
       "functionType": "StringExpression",
       "name": "Time",
       "sentence": "",
@@ -508,7 +926,7 @@
                 "value": "SetReturnString"
               },
               "parameters": [
-                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))+StrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))+StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))+StrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))+StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))+StrRepeat(StrRepeat(Time.AM,clamp(12-Time(\"hour\"),0,1)) + StrRepeat(Time.PM,clamp(Time(\"hour\")-11,0,1)),clamp(TimeFormat-1,0,1))"
+                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")), min((TimeFormat + 1) - 0, 1) + min((TimeFormat - 0) * -1, 0)) + StrRepeat(ToString(Time(\"hour\")), min((TimeFormat + 1) - 1, 1) + min((TimeFormat - 1) * -1, 0)) + StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\") - 1, 12) + 1))) + ToString(mod(Time(\"hour\") - 1, 12) + 1), min((TimeFormat + 1) - 2, 1) + min((TimeFormat - 2) * -1, 0)) + StrRepeat(ToString(mod(Time(\"hour\") - 1, 12) + 1), min((TimeFormat + 1) - 3, 1) + min((TimeFormat - 3) * -1, 0)) + StrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1)) + StrRepeat(StrRepeat(TimeAmPmSuffix.AM, clamp(12 - Time(\"hour\"), 0, 1)) + StrRepeat(TimeAmPmSuffix.PM, clamp(Time(\"hour\") - 11, 0, 1)), clamp(TimeFormat - 1, 0, 1))"
               ]
             }
           ],
@@ -523,7 +941,7 @@
                 "textG": 255,
                 "textR": 255
               },
-              "comment": "0 digit if 24H format 0\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))\n\nNO 0 digit if 24H format 1\nStrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))\n\n0 digit if 12H format 2\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3\nStrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))\n\nMinutes\nStrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))\n\n\nAM PM Automatically aded\nStrRepeat(StrRepeat(Time.AM,clamp(12-Time(\"hour\"),0,1)) + StrRepeat(Time.PM,clamp(Time(\"hour\")-11,0,1)),clamp(TimeFormat-1,0,1))\n\nAdded as parameter text\nAM\nStrRepeat(AM,clamp(12-Time(\"hour\"),0,1))\n\nPM\nStrRepeat(PM,clamp(Time(\"hour\")-11,0,1))\n\nIF selecting by TimeFormat\nNO 0 digit if 12H format 2\nStrRepeat(Time.AM,min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3 for AM PM\nStrRepeat(Time.PM,min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))"
+              "comment": "0 digit if 24H format 0\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))\n\nNO 0 digit if 24H format 1\nStrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))\n\n0 digit if 12H format 2\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3\nStrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))\n\nMinutes\nStrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1))\n\nSeconds\nStrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) +StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))\n\n\nAM PM Automatically aded\nStrRepeat(StrRepeat(Time.AM,clamp(12-Time(\"hour\"),0,1)) + StrRepeat(Time.PM,clamp(Time(\"hour\")-11,0,1)),clamp(TimeFormat-1,0,1))\n\nAdded as parameter text\nAM\nStrRepeat(AM,clamp(12-Time(\"hour\"),0,1))\n\nPM\nStrRepeat(PM,clamp(Time(\"hour\")-11,0,1))\n\nIF selecting by TimeFormat\nNO 0 digit if 12H format 2\nStrRepeat(Time.AM,min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3 for AM PM\nStrRepeat(Time.PM,min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))"
             }
           ]
         }
@@ -543,13 +961,13 @@
           "type": "expression"
         },
         {
-          "description": "SeparatorOFF",
-          "name": "SeparatorOFF",
+          "description": "SeparatorON",
+          "name": "SeparatorON",
           "type": "string"
         },
         {
-          "description": "SeparatorON",
-          "name": "SeparatorON",
+          "description": "SeparatorOFF",
+          "name": "SeparatorOFF",
           "type": "string"
         }
       ],
