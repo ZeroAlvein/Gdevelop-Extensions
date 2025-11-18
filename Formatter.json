@@ -802,7 +802,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get random word from string of words                          \nLike Minecraft splash word\n                                                                                             \nEach word needs to be separated by ONE comma \nFormatter::RandomWord(\"Cat.Dog.Cow.\")\nFormatter::RandomWord(\"Sky.Boat.Tank.Ship\")",
+      "description": "Get random word from string of words                          \nLike Minecraft splash word\n                                                                                             \nEach word needs to be separated by ONE comma ,\nFormatter::RandomWord(\"Cat,Dog,Cow\")\nFormatter::RandomWord(\"Sky,Boat,Tank,Ship\")",
       "fullName": "Random word",
       "functionType": "StringExpression",
       "name": "RandomWord",
@@ -819,7 +819,7 @@
               "parameters": [
                 "RNG",
                 "=",
-                "RandomInRange(0,StrFindLast(WordsString,\".\"))"
+                "RandomInRange(0,StrFindLast(WordsString,\",\"))"
               ]
             },
             {
@@ -829,7 +829,7 @@
               "parameters": [
                 "Start",
                 "=",
-                "StrFindFrom(\".\"+WordsString,\".\",RNG)"
+                "StrFindFrom(\",\"+WordsString,\",\",RNG)"
               ]
             },
             {
@@ -839,7 +839,7 @@
               "parameters": [
                 "End",
                 "=",
-                "StrFindFrom(WordsString+\".\",\".\",Start+1)"
+                "StrFindFrom(WordsString+\",\",\",\",Start+1)"
               ]
             },
             {
@@ -847,7 +847,7 @@
                 "value": "SetReturnString"
               },
               "parameters": [
-                "SubStr(\".\"+WordsString+\".\", Start + 1,End - Start)"
+                "SubStr(\",\"+WordsString+\",\", Start + 1,End - Start)"
               ]
             }
           ]
