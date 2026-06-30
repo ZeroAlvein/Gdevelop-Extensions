@@ -1,0 +1,979 @@
+{
+  "author": "ZeroX4",
+  "category": "General",
+  "extensionNamespace": "",
+  "fullName": "Formatter",
+  "gdevelopVersion": "",
+  "helpPath": "",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLW51bWVyaWMiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNCwxN1Y5SDJWN0g2VjE3SDRNMjIsMTVDMjIsMTYuMTEgMjEuMSwxNyAyMCwxN0gxNlYxNUgyMFYxM0gxOFYxMUgyMFY5SDE2VjdIMjBBMiwyIDAgMCwxIDIyLDlWMTAuNUExLjUsMS41IDAgMCwxIDIwLjUsMTJBMS41LDEuNSAwIDAsMSAyMiwxMy41VjE1TTE0LDE1VjE3SDhWMTNDOCwxMS44OSA4LjksMTEgMTAsMTFIMTJWOUg4VjdIMTJBMiwyIDAgMCwxIDE0LDlWMTFDMTQsMTIuMTEgMTMuMSwxMyAxMiwxM0gxMFYxNUgxNFoiIC8+PC9zdmc+",
+  "name": "Formatter",
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/3dcf4718854c4335dd1b2d0cad41b3ab1136f781a8c1424f893234a6d4e5cc38_numeric.svg",
+  "shortDescription": "Number formatting tool and more",
+  "version": "0",
+  "description": [
+    "Format numbers in various ways amd more",
+    "",
+    "Usage ",
+    "Change text of text object set to Formatter and various options will appear",
+    "",
+    "Convert 1000 it will convert it to 1K",
+    "Add separator 123456789 you will get 123.456.789",
+    "Make blinking colon to display time in format like 10:25 10 25 each other second"
+  ],
+  "tags": [
+    "number.formatting.format.comma.separator.large number.time.second.minute.hour.random word"
+  ],
+  "authorIds": [
+    "SoOZOqN0VgdXUsFHOtG7nUU2DNB2"
+  ],
+  "dependencies": [],
+  "globalVariables": [
+    {
+      "name": "SuffixVar",
+      "type": "array",
+      "children": [
+        {
+          "type": "string",
+          "value": "K"
+        },
+        {
+          "type": "string",
+          "value": "M"
+        },
+        {
+          "type": "string",
+          "value": "B"
+        },
+        {
+          "type": "string",
+          "value": "T"
+        },
+        {
+          "type": "string",
+          "value": "Qa"
+        },
+        {
+          "type": "string",
+          "value": "Qi"
+        }
+      ]
+    },
+    {
+      "name": "TimeAmPmSuffix",
+      "type": "structure",
+      "children": [
+        {
+          "name": "AM",
+          "type": "string",
+          "value": "AM"
+        },
+        {
+          "name": "PM",
+          "type": "string",
+          "value": "PM"
+        }
+      ]
+    },
+    {
+      "name": "TimeInGame",
+      "type": "structure",
+      "children": [
+        {
+          "name": "AM",
+          "type": "string",
+          "value": "AM"
+        },
+        {
+          "name": "Hour",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "Length",
+          "type": "number",
+          "value": 1
+        },
+        {
+          "name": "Minutes",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "PM",
+          "type": "string",
+          "value": "PM"
+        },
+        {
+          "name": "Seconds",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "SeparatorOFF",
+          "type": "string",
+          "value": ":"
+        },
+        {
+          "name": "SeparatorON",
+          "type": "string",
+          "value": ":"
+        },
+        {
+          "name": "TimeFormat",
+          "type": "number",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "sceneVariables": [
+    {
+      "name": "Start",
+      "type": "number",
+      "value": 0
+    },
+    {
+      "name": "End",
+      "type": "number",
+      "value": 0
+    },
+    {
+      "name": "RNG",
+      "type": "number",
+      "value": 0
+    }
+  ],
+  "eventsFunctions": [
+    {
+      "description": "Set large number suffix",
+      "fullName": "Set large number suffix",
+      "functionType": "Action",
+      "name": "SetLargeNumberSuffix",
+      "sentence": "Set number suffix of: Thousand to _PARAM1_, Million to _PARAM2_, Trillion to _PARAM3_, Billion to _PARAM4_, Quadrillion to _PARAM5_, Quintillion to _PARAM6_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[0]",
+                "=",
+                "Thousand"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[1]",
+                "=",
+                "Million"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[2]",
+                "=",
+                "Billion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[3]",
+                "=",
+                "Trillion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[4]",
+                "=",
+                "Quadrillion"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SuffixVar[5]",
+                "=",
+                "Quintillion"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Thousand default K",
+          "name": "Thousand",
+          "supplementaryInformation": "[\"K\"]",
+          "type": "string"
+        },
+        {
+          "description": "Million default M",
+          "name": "Million",
+          "supplementaryInformation": "[\"M\"]",
+          "type": "string"
+        },
+        {
+          "description": "Billion default B",
+          "name": "Billion",
+          "supplementaryInformation": "[\"B\"]",
+          "type": "string"
+        },
+        {
+          "description": "Trillion default T",
+          "name": "Trillion",
+          "supplementaryInformation": "[\"T\"]",
+          "type": "string"
+        },
+        {
+          "description": "Quadrillion default Qa",
+          "name": "Quadrillion",
+          "supplementaryInformation": "[\"Qa\"]",
+          "type": "string"
+        },
+        {
+          "description": "Quintillion default Qi",
+          "name": "Quintillion",
+          "supplementaryInformation": "[\"Qi\"]",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Set time AM PM suffix",
+      "fullName": "Set time AM PM suffix",
+      "functionType": "Action",
+      "name": "SetDeviceTimeSuffix",
+      "sentence": "Set time AM suffix to _PARAM1_, PM suffix to _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeAmPmSuffix.AM",
+                "=",
+                "AM"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeAmPmSuffix.PM",
+                "=",
+                "PM"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Default AM",
+          "name": "AM",
+          "type": "string"
+        },
+        {
+          "description": "Default PM",
+          "name": "PM",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Set in game time formatting",
+      "fullName": "Set in game time formatting",
+      "functionType": "Action",
+      "name": "SetGameTime",
+      "sentence": "Set in game time formatting for time format _PARAM1_, extra 0 in front of hour _PARAM2_, time length  _PARAM3_, separator ON _PARAM4_ OFF _PARAM5_, AM_PARAM6_  PM _PARAM7_ suffix ",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "TimeFormat",
+                "=",
+                "\"24h\""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "0"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "1"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "TimeFormat",
+                "=",
+                "\"12h\""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "2"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                  },
+                  "parameters": [
+                    "ExtraZero",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "TimeInGame.TimeFormat",
+                    "=",
+                    "3"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "0"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour : Minutes\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "Length",
+                "=",
+                "\"Hour : Minutes : Seconds\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "TimeInGame.Length",
+                "=",
+                "2"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.SeparatorOFF",
+                "=",
+                "SeparatorON"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.SeparatorON",
+                "=",
+                "SeparatorOFF"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.AM",
+                "=",
+                "InGameAM"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "TimeInGame.PM",
+                "=",
+                "InGamePM"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Time format",
+          "name": "TimeFormat",
+          "supplementaryInformation": "[\"24h\",\"12h\"]",
+          "type": "stringWithSelector"
+        },
+        {
+          "defaultValue": "yes",
+          "description": "Add extra 0 in front of hour if hour is below 10",
+          "name": "ExtraZero",
+          "optional": true,
+          "supplementaryInformation": "[\"Yes\",\"No\"]",
+          "type": "yesorno"
+        },
+        {
+          "description": "Length",
+          "name": "Length",
+          "supplementaryInformation": "[\"Hour\",\"Hour : Minutes\",\"Hour : Minutes : Seconds\"]",
+          "type": "stringWithSelector"
+        },
+        {
+          "description": "SeparatorON",
+          "name": "SeparatorON",
+          "type": "string"
+        },
+        {
+          "description": "SeparatorOFF",
+          "name": "SeparatorOFF",
+          "type": "string"
+        },
+        {
+          "description": "AM suffix",
+          "name": "InGameAM",
+          "type": "string"
+        },
+        {
+          "description": "PM suffix",
+          "name": "InGamePM",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Add separators to number between each 3 digits      \nFrom right to left if number is above 999                     \n                                                                                         \nFor example if variable Score = 12345678 \nFormatter::AddSeparator(Score, \".\") = 12.345.678      \nFormatter::AddSeparator(Score, \"_\") = 12_345_678      ",
+      "fullName": "Add separator",
+      "functionType": "StringExpression",
+      "name": "AddSeparator",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(Separator + SubStr(Number, 1 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 3, 1))) + StrRepeat(Separator + SubStr(Number, 4 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 6, 1))) + StrRepeat(Separator + SubStr(Number, 7 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 9, 1))) + StrRepeat(Separator + SubStr(Number, 10 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 12, 1))) + StrRepeat(Separator + SubStr(Number, 13 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 15, 1))) + StrRepeat(Separator + SubStr(Number, 16 + mod(StrLength(Number) - 1, 3), 3), StrLength(SubStr(Number, 18, 1)))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Number",
+          "name": "Number",
+          "type": "expression"
+        },
+        {
+          "description": "Separator",
+          "name": "Separator",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Create blinking separator (good for time formatting)\nFormatter::Blinker(Time(\"sec\"), \":\", \" \")                    \nFormatter::Blinker(YourSecondsTimeVariable, \":\", \" \")\n                                                                                             \nFor example                                                                   \nToString(Time(\"hour\"))+Formatter::Blinker(Time(\"sec\"), \":\", \" \")+ToString(Time(\"min\"))\n                                        \n                                                                                               \nWill display 12:10 and 12 10 blinking each other second\nUse Formatter::Time() to display already formated time",
+      "fullName": "Blinking Separator",
+      "functionType": "StringExpression",
+      "name": "Blinker",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(SeparatorOFF, mod(TimeInSeconds, 2)) + StrRepeat(SeparatorON, abs(mod(TimeInSeconds, 2) - 1))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "TimeInSeconds",
+          "name": "TimeInSeconds",
+          "type": "expression"
+        },
+        {
+          "description": "SeparatorOFF",
+          "name": "SeparatorOFF",
+          "type": "string"
+        },
+        {
+          "description": "SeparatorON",
+          "name": "SeparatorON",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Format number into 1-3 digits with extra suffix            \n                                                                                       \nYou have variable Score equal to 1234                     \nFormatter::FormatNumber(Score, \"\", 0, \"\") = 1K\nFormatter::FormatNumber(Score, \".\", 1, \"\") = 1.2K\nFormatter::FormatNumber(Score, \",\", 2, \" \") = 1,23 K\nFormatter::FormatNumber(Score, \" . \", 3, \"-\") = 1 . 234-K\n                                                                                       \nScore = 987 654 321                                                  \nFormatter::FormatNumber(Score, \";\", 0, \"-\") = 987-M\nFormatter::FormatNumber(Score, \";\", 2, \"-\")  = 987;65-M  \nSet separator to \"\" to show nothing\n                                                                                           \nTo change suffix like K M B T to k m b t or whatever  \nUse action Set large number suffix                                 \nOr open extension and edit it in global variables    ",
+      "fullName": "Format number with suffix",
+      "functionType": "StringExpression",
+      "name": "FormatNumber",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Comment",
+          "color": {
+            "b": 0,
+            "g": 0,
+            "r": 0,
+            "textB": 255,
+            "textG": 255,
+            "textR": 255
+          },
+          "comment": "SuffixVar 0 = K       1 000\nSuffixVar 1 = M       1 000 000\nSuffixVar 2 = B        1 000 000 000\nSuffixVar 3 = T         1 000 000 000 000\nSuffixVar 4 = Qa       1 000 000 000 000 000\nSuffixVar 5 = Qi         1 000 000 000 000 000 000"
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(Number, 0, 1 + mod(StrLength(Number) - 1, 3)) + StrRepeat(FirstSeparator+SubStr(Number,1+mod(StrLength(Number)-1,3),clamp(Decimal, 0, 3)),StrLength(SubStr(Number,3,clamp(Decimal, 0, 1)))) + StrRepeat(SecondSeparator, StrLength(SubStr(Number, 3, 1))) + StrRepeat(SuffixVar[round((StrLength(Number) - 2) / 3) - 1], StrLength(SubStr(Number, 3, 1)))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Number",
+          "name": "Number",
+          "type": "expression"
+        },
+        {
+          "description": "First Separator",
+          "name": "FirstSeparator",
+          "type": "string"
+        },
+        {
+          "description": "Decimal",
+          "name": "Decimal",
+          "type": "expression"
+        },
+        {
+          "description": "Second Separator",
+          "name": "SecondSeparator",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Displays your game frames per second FPS                     \nFor example Formatter::FPS()                                           \n                                                                                               \nOr to be more fancy                                                         \n\"FPS \"+Formatter::FPS()                                                  ",
+      "fullName": "Display FPS",
+      "functionType": "StringExpression",
+      "name": "FPS",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "ToString(round(1/TimeDelta()))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Get random word from string of words                          \nLike Minecraft splash word\n                                                                                             \nEach word needs to be separated by ONE comma ,\nFormatter::RandomWord(\"Cat,Dog,Cow\")\nFormatter::RandomWord(\"Sky,Boat,Tank,Ship\")",
+      "fullName": "Random word",
+      "functionType": "StringExpression",
+      "name": "RandomWord",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "RNG",
+                "=",
+                "RandomInRange(0,StrFindLast(WordsString,\",\"))"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "Start",
+                "=",
+                "StrFindFrom(\",\"+WordsString,\",\",RNG)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "End",
+                "=",
+                "StrFindFrom(WordsString+\",\",\",\",Start+1)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "SubStr(\",\"+WordsString+\",\", Start + 1,End - Start)"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "WordsString",
+          "name": "WordsString",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Display your game time in various formats                   \nAdd action called Set in game time formatting             \nWhole configuration is there                                           \nHere you only provide your hour minutes and seconds",
+      "fullName": "Display in game time",
+      "functionType": "StringExpression",
+      "name": "GameTime",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(trunc(Hour)))) + ToString(trunc(Hour)), min((TimeInGame.TimeFormat + 1) - 0, 1) + min((TimeInGame.TimeFormat - 0) * -1, 0)) + StrRepeat(ToString(trunc(Hour)), min((TimeInGame.TimeFormat + 1) - 1, 1) + min((TimeInGame.TimeFormat - 1) * -1, 0)) + StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(trunc(Hour) - 1, 12) + 1))) + ToString(mod(trunc(Hour) - 1, 12) + 1), min((TimeInGame.TimeFormat + 1) - 2, 1) + min((TimeInGame.TimeFormat - 2) * -1, 0)) + StrRepeat(ToString(mod(trunc(Hour) - 1, 12) + 1), min((TimeInGame.TimeFormat + 1) - 3, 1) + min((TimeInGame.TimeFormat - 3) * -1, 0)) + StrRepeat(StrRepeat(TimeInGame.SeparatorON, abs(mod(trunc(trunc(Seconds)), 2) - 1)) + StrRepeat(TimeInGame.SeparatorOFF, mod(trunc(trunc(Seconds)), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(trunc(Minutes)))) + ToString(trunc(Minutes)), clamp(TimeInGame.Length, 0, 1)) + StrRepeat(StrRepeat(TimeInGame.SeparatorON, abs(mod(trunc(trunc(Seconds)), 2) - 1)) + StrRepeat(TimeInGame.SeparatorOFF, mod(trunc(trunc(Seconds)), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(trunc(trunc(Seconds))))) + ToString(trunc(trunc(Seconds))), clamp(TimeInGame.Length - 1, 0, 1)) + StrRepeat(StrRepeat(TimeInGame.AM, clamp(12 - trunc(Hour), 0, 1)) + StrRepeat(TimeInGame.PM, clamp(trunc(Hour) - 11, 0, 1)), clamp(TimeInGame.TimeFormat - 1, 0, 1))"
+              ]
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Hour",
+          "name": "Hour",
+          "type": "expression"
+        },
+        {
+          "description": "Minutes",
+          "name": "Minutes",
+          "type": "expression"
+        },
+        {
+          "description": "Seconds",
+          "name": "Seconds",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Display your device time in various formats               \n══════════════════════════════════╣\nIf time is 09 : 15 : 42 AM then                                            \nFormatter::Time(0, 0, \":\", \" \") = 09                         \nFormatter::Time(1, 1, \":\", \" \") = 9:15                          \nFormatter::Time(0, 2, \":\", \" \") = 09:15:42                \nFormatter::Time(2, 1, \":\", \" \") = 09:15AM         \nFormatter::Time(3, 1, \" \", \" \") = 9 15AM\n                                                                                             \nIf time is 09 : 15 : 42 PM then                                             \nFormatter::Time(0, 1, \":\", \" \") = 21:15                    \nFormatter::Time(2, 1, \"-\", \" \") = 21-15                    \nFormatter::Time(2, 2, \" \", \" \") = 09 15 42PM   \nFormatter::Time(2, 1, \":\", \" \") = 09:15PM     \nFormatter::Time(3, 1, \":\", \" \") = 9:15AM     \n                                                                                             \nSet separators to \" \" to have space between numbers\nFormatter::Time(0, 1, \" \", \" \")\n                                                                                             \nSet separators to same character to stop bliinking      \nFormatter::Time(0, 1, \":\", \":\")\n                                                                                             \nTo change AM PM use action Set time AM PM suffix        \nOr open extension and edit it in global variables",
+      "fullName": "Display device time",
+      "functionType": "StringExpression",
+      "name": "Time",
+      "sentence": "",
+      "events": [
+        {
+          "folded": true,
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnString"
+              },
+              "parameters": [
+                "StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")), min((TimeFormat + 1) - 0, 1) + min((TimeFormat - 0) * -1, 0)) + StrRepeat(ToString(Time(\"hour\")), min((TimeFormat + 1) - 1, 1) + min((TimeFormat - 1) * -1, 0)) + StrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\") - 1, 12) + 1))) + ToString(mod(Time(\"hour\") - 1, 12) + 1), min((TimeFormat + 1) - 2, 1) + min((TimeFormat - 2) * -1, 0)) + StrRepeat(ToString(mod(Time(\"hour\") - 1, 12) + 1), min((TimeFormat + 1) - 3, 1) + min((TimeFormat - 3) * -1, 0)) + StrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1)) + StrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1)) + StrRepeat(StrRepeat(TimeAmPmSuffix.AM, clamp(12 - Time(\"hour\"), 0, 1)) + StrRepeat(TimeAmPmSuffix.PM, clamp(Time(\"hour\") - 11, 0, 1)), clamp(TimeFormat - 1, 0, 1))"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 0,
+                "g": 0,
+                "r": 0,
+                "textB": 255,
+                "textG": 255,
+                "textR": 255
+              },
+              "comment": "0 digit if 24H format 0\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"hour\")))) + ToString(Time(\"hour\")),min((TimeFormat+1)-0,1)+min((TimeFormat-0)*-1,0))\n\nNO 0 digit if 24H format 1\nStrRepeat(ToString(Time(\"hour\")),min((TimeFormat+1)-1,1)+min((TimeFormat-1)*-1,0))\n\n0 digit if 12H format 2\nStrRepeat(StrRepeat(\"0\", 2 - StrLength(ToString(mod(Time(\"hour\")-1,12)+1))) + ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3\nStrRepeat(ToString(mod(Time(\"hour\")-1,12)+1),min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))\n\nMinutes\nStrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) + StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"min\")))) + ToString(Time(\"min\")), clamp(Length, 0, 1))\n\nSeconds\nStrRepeat(StrRepeat(SeparatorON, abs(mod(Time(\"sec\"), 2) - 1)) + StrRepeat(SeparatorOFF, mod(Time(\"sec\"), 2)) +StrRepeat(\"0\", 2 - StrLength(ToString(Time(\"sec\")))) + ToString(Time(\"sec\")), clamp(Length - 1, 0, 1))\n\n\nAM PM Automatically aded\nStrRepeat(StrRepeat(Time.AM,clamp(12-Time(\"hour\"),0,1)) + StrRepeat(Time.PM,clamp(Time(\"hour\")-11,0,1)),clamp(TimeFormat-1,0,1))\n\nAdded as parameter text\nAM\nStrRepeat(AM,clamp(12-Time(\"hour\"),0,1))\n\nPM\nStrRepeat(PM,clamp(Time(\"hour\")-11,0,1))\n\nIF selecting by TimeFormat\nNO 0 digit if 12H format 2\nStrRepeat(Time.AM,min((TimeFormat+1)-2,1)+min((TimeFormat-2)*-1,0))\n\n\nNO 0 digit if 12H format 3 for AM PM\nStrRepeat(Time.PM,min((TimeFormat+1)-3,1)+min((TimeFormat-3)*-1,0))"
+            }
+          ]
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "TimeFormat",
+          "name": "TimeFormat",
+          "type": "expression"
+        },
+        {
+          "description": "Length",
+          "name": "Length",
+          "type": "expression"
+        },
+        {
+          "description": "SeparatorON",
+          "name": "SeparatorON",
+          "type": "string"
+        },
+        {
+          "description": "SeparatorOFF",
+          "name": "SeparatorOFF",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    }
+  ],
+  "eventsBasedBehaviors": [],
+  "eventsBasedObjects": []
+}
