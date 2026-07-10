@@ -63,3 +63,5 @@ If you hold LMB/MMB on 2nd click you can drag it to expand selection, and then w
 ## Step 1.2
 # Creating inner corners
 
+What are inner corners? Best to explain it with image
+
