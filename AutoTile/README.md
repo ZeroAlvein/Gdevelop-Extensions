@@ -43,7 +43,7 @@ Now repetition is A LOT more visible.
 
 Now magic happens.  
 Both rows show what we need to do, but bottom one is color coded so we can tell where each sub tile came from.  
-A - our 9 tiles with grid of tile size divided by 2
+A - our 9 tiles with grid of tile size divided by 2  
 B - we only take color codded sub tiles form A  
 C - here we put them together so they use up less space  
 D - we copy each corner sub tile (blue) and paste them together in top left then copy all 4 center sub tiles and paste them in top right  
