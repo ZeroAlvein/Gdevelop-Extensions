@@ -320,4 +320,4 @@ In section 4.2 point 7 i explained that
 
 
 And that is pretty much it. You are ready to use AutoTile as you please.  
-You can even try it in my [Test Game](https://gd.games/instant-builds/c533532b-8de9-4e33-bbab-c959f4ed9cff)
+You can even try it in my [Test Game](https://gd.games/instant-builds/e127d524-9f91-4d49-b5dc-986cae7f1e09)
