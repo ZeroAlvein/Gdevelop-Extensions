@@ -68,6 +68,7 @@ In Ase/Libresprite when you have some selection, you can hold shift and press ar
 # Section 1.3 Creating inner corners
 
 Best to explain what inner corners are is by looking at tiles placed in cross shape  
+
 <img width="1295" height="694" alt="image" src="https://github.com/user-attachments/assets/5315ef8c-b249-47be-b91a-f977ef65827d" />
 
 If you look at center tile then all sub tiles don't match.  
@@ -128,19 +129,23 @@ And ingame it will look like this (i have green background on my trees)
 # Section 1.5 Adjusting our tileset  
 
 Look i made this tileset.  
+
 <img width="389" height="541" alt="image" src="https://github.com/user-attachments/assets/be760c3a-2a00-4143-8054-ec5a84fb155a" />
 
 
 But i don't like how single tile looks, and the fact that if i make cross shape it goes inwards.  
+
 <img width="980" height="677" alt="image" src="https://github.com/user-attachments/assets/94a05e30-334f-433f-b75d-1cdcc7ac190f" />
 
 Believe or not we can fix it.  
 To fix single tile, we just editing top left tile on our tileset.  
 BUT for for fixing it going inwards we can do simply swap position of each wall sub tiles on their axis.  
 I literaly just swapped their positions nothing more.  
+
 <img width="539" height="769" alt="image" src="https://github.com/user-attachments/assets/928c4f95-3f87-47c1-9cab-d00ef2414ec8" />
 
 And result is, old on top and new on bottom.  
+
 <img width="834" height="757" alt="image" src="https://github.com/user-attachments/assets/b1f18eaa-a78d-4655-a706-3f252ffb5341" />
 
 Be aware this trick won't work for every single tileset, and some sets will need manual adjusting.
@@ -148,9 +153,11 @@ Be aware this trick won't work for every single tileset, and some sets will need
 # Section 1.6 Understand which sub tile is what part of actual tile
 
 We gonna use 1st tileset you saw in this guide.  
+
 <img width="342" height="508" alt="image" src="https://github.com/user-attachments/assets/c76a9405-5008-4d10-b3e9-0e4db8af6960" />
 
 And here we go.  
+
 <img width="1294" height="710" alt="image" src="https://github.com/user-attachments/assets/b199e62d-b7bc-4925-a780-58775a198386" />
 
 On bottom i marked in red rectangle whole tiles built from 4 sub tiles, and we see that always yellow sub tile is in upper right corner of tile.  
@@ -167,13 +174,16 @@ ONLY exception here are center sub tiles, but as i explained earlier it's cause 
 So far we seen tilesets that fit topdown games or background. But what about platformer games for example we wanna platform?  
 Have no fear papu zero is here.  
 Remember our 1st tileset we used to learn how this system work?  
+
 <img width="192" height="192" alt="image" src="https://github.com/user-attachments/assets/e21ecfb8-8621-470c-8b59-7d78b95b6550" />
 
 We literally only need to draw platform on top sub tiles.  
 Pay close attention to inner corners sub tiles. They are just extension of platform without outline.  
+
 <img width="1011" height="610" alt="image" src="https://github.com/user-attachments/assets/c8118e67-4920-41f7-8f78-fc14f5f67bf1" />
 
 Result ingame  
+
 <img width="843" height="742" alt="image" src="https://github.com/user-attachments/assets/52208b2b-0331-42e8-b458-37c12486a3bf" />
 
 
@@ -181,11 +191,13 @@ Result ingame
 
 FENCES all kind of them, there is no way around making it proper with this minimalistic tile count.  
 Here we have few fecenes tilesets.  
+
 <img width="1026" height="382" alt="image" src="https://github.com/user-attachments/assets/0c1c2909-890b-4a4e-ab9c-c2f79db28c41" />
 
 Nothing will fix them having that gap if you place 4 of them next to each other.  
 But drawing them in straight lines will look perfectly fine.  
 Where other limitation is the repetition. We cannot spread vertical pieces horizontally neither horziontal ones vertically.  
+
 <img width="1443" height="845" alt="image" src="https://github.com/user-attachments/assets/17ce5195-a2bc-47ce-863b-2ba02098bdea" />
 
 So in other words, you can draw fences only as hollow shapes empty inside, or you gonna get visual bug you see at bottom row.  
@@ -242,16 +254,46 @@ D - we can click here on our tiles and they will be marked in red to indicate wh
 A - we click on burger icon in top left  
 B - then + next to extensions  
 C - import extension button  
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/45d00dac-ec4c-4cfa-a8b9-783845764abd" />
 
 Next we double click our tilemap object and go to behaviors tab. Here we click Add a behavior and in search bar we type auto and add AutoTile.  
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/103fbeab-3d53-4ffd-8b2d-bff35c7b37d2" />
+
+<img width="1004" height="359" alt="image" src="https://github.com/user-attachments/assets/0f7e2de8-cfbe-4a7e-a58d-a54328b5d309" />
 
 Here all we need to do is put same exact number in Tile size as we put in tilemap object properties tab (we did it in section 3.2).  
+
 <img width="1245" height="363" alt="image" src="https://github.com/user-attachments/assets/f48a022b-19b0-4c6c-88ff-89706472f178" />
 
 This option "Enable AutoTile" needs to be checked for tiles to auto connect.
 This extension have save/load functionality i will explain later, and its so it work properly with tilemap objects which you would use in normal way.  
 Where each tile is one image of something for example decorations or whatever.  These most likely should not auto tile.  
 
-# Section 4.1 
+# Section 4.1 Managing our tilemap via events sheet  
+
+Tilemap object is like canvas on which you can paint your tiles, so 1st we would need to drag our tilemap object into our scene.  
+But then it gives us nothing we would also need to draw any tile at top left and bottom right corners (or top right and bottom left).  
+That is how we establish our canvas. But there is nothing for us to be allowed to draw tiles beyond our canvas.  
+But we can change position of our tilemap object, and there is action for tilemap object to change its row and column count.  
+In other words we can set our canvas in events sheet and i strongly suggest you do that.  
+
+We have ehre bunch of my events that create and properly set up my tilemap object in my scene.  
+
+<img width="1408" height="195" alt="image" src="https://github.com/user-attachments/assets/9678176b-a8c5-493a-8eae-6d8694da70f8" />
+
+
+# Section 4.2 Painting our tiles
+
+My events for managing tilesets via event.  
+Going from top to bottom:  
+1 - is for removing all tiles from selected tilemap object  
+2 - when holding shift we snap SOME object to tilemap grid in case we need better indication of of where we gonna place tile, and we hide actual cursor  
+3 - we do oppposite to what we did in 2 if shift is not pressed  
+4 - this will update ALL tiles in selected tilemap **BE AWARE THE BIGGER TILEMAP YOU HAVE AND MORE TILES ON IT THE LONGER IT WILL TAKE SO LAG!!!**  
+5 - use this action to create tile at whatever position you want. You can use X and Y pos of object you use in snap object to grid action from #2  
+Additionally it have 2 parameters. One where you see NumberVar that is where you put number which determine which set you want to use so it makes more sense to have there variable which value you can change on the fly. And one on end which says NO. If its set to yes it will update only one tile, and will try to connect it to any adjacent tile even if that tile is from different set. Where if its set to NO it will update all adjacent tile from tile at position you create tile, but will connect only sets to their own sets but not to others  
+6 - simply removing tile from current position  
+7 -  is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly  
+
+<img width="1678" height="506" alt="image" src="https://github.com/user-attachments/assets/d8492a93-c0a5-48c6-b837-b7701e9782af" />
+
