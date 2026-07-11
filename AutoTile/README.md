@@ -12,6 +12,27 @@ Sub tile - 1/4 part of whole tile
 Tile atlas/atlas image - image containing all your tilesets  
 Tile data - ID's and position of all your tiles on your tilemap object  
 
+## Table of stupidity
+- Section 1.1 Creating our tileset
+- Section 1.2 Reducing our tileset
+- Section 1.3 Creating inner corners
+- Section 1.4 Creating tileset from only center tile
+- Section 1.5 Adjusting our tileset 
+- Section 1.6 Understand which sub tile is what part of actual tile
+- Section 1.7 Side view (platformer) tilesets 
+- Section 1.8 Known limitations  
+- Section 2.1 Multiple tilesets in atlas image
+- Section 2.2 Propper size  
+- Section 3.1 Setting up tilemap object
+- Section 3.2 Adding and setting up AutoTile extension to tilemap object
+- Section 4.1 Managing our tilemap via events sheet  
+- Section 4.2 Painting our tiles
+- Section 4.3 Switching tilesets ingame
+- Section 5.1 Saving/Loading our tilemap tiles to/from JSON file
+- Section 5.2 Saving/Loading our tilemap tile data to and from storage
+- Section 6.1 Connecting tilesets paramter in create tile action
+- Section 6.1 using two tilesets to fake height  
+
 Ok let's go.
 
 # Section 1.1 Creating our tileset
@@ -420,7 +441,7 @@ I could put for example trees on any sufrace would it be grass or dirt path or w
 
 There are plenty of creative ways to achieve cool looking levles/maps.  
 
-# Section 6.1 using two tilesets to fake height
+# Section 6.2 using two tilesets to fake height
 
 I simplified meaning of it, but due lower count of unique tiles in tilesets you will need to use multiple tilesets to create some shapes.  
 
