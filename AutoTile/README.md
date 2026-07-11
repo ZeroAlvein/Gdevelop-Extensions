@@ -460,7 +460,7 @@ You could even fake shadows this way.
 
 <img width="735" height="544" alt="image" src="https://github.com/user-attachments/assets/24b9de73-9c8e-4676-9982-d025b49ba536" />
 
-That is all you need to know to use this extension so go AutoTile yoursef.
+Amd that is all you need to know to use this extension so go AutoTile yoursef.
 
 Enjoy <('.'< )  
 De Ent
