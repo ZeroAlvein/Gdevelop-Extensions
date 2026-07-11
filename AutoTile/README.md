@@ -90,7 +90,7 @@ D - we put back our inner corners tile into top right spot
 And now you learn the full layout of each tileset.  
 Top left tile = single tile  
 Top right tile = our inner corners tile  
-And what is below is our walls + corners + center tiles  
+And what is below are our walls + corners + center tiles  
 
 
 # Section 1.4 Creating tileset from only center tile
