@@ -100,7 +100,7 @@ We gonna go with 2 patterns. Top one is for brick wall and bottom is for wood pl
 
 A - we make our pattern on center tile that will repeat all over other tiles  
 B - then we copy that tile into all 8 adjacent tiles  
-C - and we create frame (think like wall edges) in case of bricks its easy to think of it as dugeon walls, where wood planks for bridge is a bit tricky  
+C - and we create frame (think like wall edges) for bricks its easy to think of it as dugeon walls, wood planks for bridge are a bit tricky  
 D - finally we 1st copy/paste B onto D then C onto D and we get nice 9 tiles shape  
 E - using method from section 1.2 we reduce our tileset  
 
