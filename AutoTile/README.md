@@ -100,9 +100,9 @@ We gonna go with 2 patterns. Top one is for brick wall and bottom is for wood pl
 
 A - we make our pattern on center tile that will repeat all over other tiles  
 B - then we copy that tile into all 8 adjacent tiles  
-C - and we create frame (think like wall edges) in case of bricks its easy to think of it as dugeon walls, where wood planks for bridge is a bit tricky
-D - finally we 1st copy/paste B onto D then C onto D and we get nice 9 tiles shape
-E - using method from section 1.2 we reduce our tileset
+C - and we create frame (think like wall edges) in case of bricks its easy to think of it as dugeon walls, where wood planks for bridge is a bit tricky  
+D - finally we 1st copy/paste B onto D then C onto D and we get nice 9 tiles shape  
+E - using method from section 1.2 we reduce our tileset  
 
 
 <img width="1583" height="718" alt="image" src="https://github.com/user-attachments/assets/fcfe0f17-8090-4807-a5f8-7989978c89b1" />
@@ -118,7 +118,7 @@ For example we gonna try with trees now (same goes for mountains/spikes and stuf
 A - we create just a single tree  
 B - now we copy/paste it 3 times so we have 4 trees in total  
 C - we paste one tree between bottom trees and one sub tile space below them  
-D - lastly we paste two tiles at very bottom, and that's it
+D - lastly we paste two tiles at very bottom, and that's it  
 
 <img width="1333" height="624" alt="image" src="https://github.com/user-attachments/assets/475a97f6-bd8f-4e1b-9af9-7244bcfbe7e6" />
 
