@@ -392,7 +392,6 @@ Now look i will press Q to switch to tileset #58 and draw rectangle worth of 2 t
 
 <img width="1083" height="668" alt="image" src="https://github.com/user-attachments/assets/da0731bc-e551-4e66-b233-246311819605" />
 
-
 Then i switch to tileset #55 and i will draw solid green tiles inside inner part of that rectangle  
 
 <img width="976" height="679" alt="image" src="https://github.com/user-attachments/assets/c3356ea1-537a-4cbd-964c-7be7c45c4ceb" />
@@ -403,7 +402,13 @@ And now i press C to enable tiles connecting to tiles from different tilesets an
 
 And that is exaclty how i created that whole layout/leve whatever you name it. That you see when you launch my test game. 
 
-<img width="1918" height="1024" alt="image" src="https://github.com/user-attachments/assets/01215b70-13f3-4a3a-8ea0-462657a717e8" />
+<img width="1918" height="1024" alt="image" src="https://github.com/user-attachments/assets/01215b70-13f3-4a3a-8ea0-462657a717e8" />  
+
+I want to point out here again that using 2 tilemaps and splitting tilesets between them would make much more sense.  
+Cause as you see i needed to paint green backgroudn on my sets for everything to match, but if i would have there transparent color and two tilemaps.  
+I could put for example trees on any sufrace would it be grass or dirt path or whatever even on water.
+
+There are plenty of creative ways to achieve cool looking levles.  
 
 # Section 6.1 using two tilesets to fake height
 
