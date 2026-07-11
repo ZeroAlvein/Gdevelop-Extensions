@@ -1,0 +1,293 @@
+{
+  "author": "ZeroX4",
+  "category": "",
+  "dimension": "",
+  "extensionNamespace": "",
+  "fullName": "SaveLoadEasy",
+  "gdevelopVersion": "",
+  "helpPath": "",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLWNvbnRlbnQtc2F2ZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGQ9Ik0xNSw5SDVWNUgxNU0xMiwxOUEzLDMgMCAwLDEgOSwxNkEzLDMgMCAwLDEgMTIsMTNBMywzIDAgMCwxIDE1LDE2QTMsMyAwIDAsMSAxMiwxOU0xNywzSDVDMy44OSwzIDMsMy45IDMsNVYxOUEyLDIgMCAwLDAgNSwyMUgxOUEyLDIgMCAwLDAgMjEsMTlWN0wxNywzWiIgLz48L3N2Zz4=",
+  "name": "SaveLoadEasy",
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/ed9dc9aba04820ae44e5adf70bd3b955cd899dec13739488e94ae6ef2b6ef180_content-save.svg",
+  "shortDescription": "Save and Load easy",
+  "version": "",
+  "description": "Save and Load variables easy",
+  "tags": [],
+  "authorIds": [
+    "SoOZOqN0VgdXUsFHOtG7nUU2DNB2"
+  ],
+  "dependencies": [],
+  "globalVariables": [],
+  "sceneVariables": [],
+  "eventsFunctions": [
+    {
+      "description": "Load variable from storage",
+      "fullName": "Load",
+      "functionType": "Action",
+      "name": "Load",
+      "sentence": "Load variable  _PARAM1_, from group _PARAM2_, in storage _PARAM3_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "ReadStringFromStorage"
+              },
+              "parameters": [
+                "StorageName",
+                "GroupName",
+                "ToJSON(FailVariable)",
+                "TempVar"
+              ]
+            },
+            {
+              "type": {
+                "value": "JSONToVariableStructure2"
+              },
+              "parameters": [
+                "TempVar",
+                "SaveVar"
+              ]
+            },
+            {
+              "type": {
+                "value": "CopyVariableToArgument2"
+              },
+              "parameters": [
+                "\"ActionVariable\"",
+                "SaveVar"
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "SaveVar",
+              "type": "structure",
+              "children": []
+            },
+            {
+              "name": "TempVar",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Variable you want to load",
+          "name": "ActionVariable",
+          "type": "variable"
+        },
+        {
+          "description": "Name of your group",
+          "name": "GroupName",
+          "type": "string"
+        },
+        {
+          "description": "Name of your Storage",
+          "name": "StorageName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Save variable to storage",
+      "fullName": "Save",
+      "functionType": "Action",
+      "name": "Save",
+      "sentence": "Save variable _PARAM1_, to group _PARAM2_, in storage _PARAM3_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "CopyArgumentToVariable2"
+              },
+              "parameters": [
+                "\"ActionVariable\"",
+                "SaveVar"
+              ]
+            },
+            {
+              "type": {
+                "value": "EcrireFichierTxt"
+              },
+              "parameters": [
+                "StorageName",
+                "GroupName",
+                "ToJSON(SaveVar)"
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "SaveVar",
+              "type": "structure",
+              "children": []
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Variable you want to save",
+          "name": "ActionVariable",
+          "type": "variable"
+        },
+        {
+          "description": "Name of your group",
+          "name": "GroupName",
+          "type": "string"
+        },
+        {
+          "description": "Name of your Storage",
+          "name": "StorageName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Delete group from storage",
+      "fullName": "Delete group",
+      "functionType": "Action",
+      "name": "DeleteGroup",
+      "sentence": "Delete group _PARAM1_, from storage _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "DeleteGroupFichier"
+              },
+              "parameters": [
+                "StorageName",
+                "GroupName"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Name of your group",
+          "name": "GroupName",
+          "type": "string"
+        },
+        {
+          "description": "Name of your Storage",
+          "name": "StorageName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Delete storage",
+      "fullName": "Delete storage",
+      "functionType": "Action",
+      "name": "DeleteStorage",
+      "sentence": "Delete storage _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "DeleteFichier"
+              },
+              "parameters": [
+                "StorageName"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Name of your Storage",
+          "name": "StorageName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Check if save exist",
+      "fullName": "Save exist",
+      "functionType": "Condition",
+      "name": "SaveExist",
+      "sentence": "Save exist in  group _PARAM1_, storage _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "GroupExists"
+              },
+              "parameters": [
+                "StorageName",
+                "GroupName"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Name of your group",
+          "name": "GroupName",
+          "type": "string"
+        },
+        {
+          "description": "Name of your Storage",
+          "name": "StorageName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    }
+  ],
+  "eventsFunctionsFolderStructure": {
+    "folderName": "__ROOT",
+    "children": [
+      {
+        "functionName": "Load"
+      },
+      {
+        "functionName": "Save"
+      },
+      {
+        "functionName": "DeleteGroup"
+      },
+      {
+        "functionName": "DeleteStorage"
+      },
+      {
+        "functionName": "SaveExist"
+      }
+    ]
+  },
+  "eventsBasedBehaviors": [],
+  "eventsBasedObjects": []
+}
