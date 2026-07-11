@@ -142,6 +142,7 @@ Believe or not we can fix it.
 To fix single tile, we just editing top left tile on our tileset.  
 BUT for for fixing it going inwards we can do simply swap position of each wall sub tiles on their axis.  
 I literaly just swapped their positions nothing more.  
+To be clear what i did to top and bottom walls i also did to left and right walls.  
 
 <img width="539" height="769" alt="image" src="https://github.com/user-attachments/assets/928c4f95-3f87-47c1-9cab-d00ef2414ec8" />
 
