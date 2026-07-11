@@ -203,6 +203,13 @@ Where other limitation is the repetition. We cannot spread vertical pieces horiz
 So in other words, you can draw fences only as hollow shapes empty inside, or you gonna get visual bug you see at bottom row.  
 Last column should help you visualise what i did.  
 
+Also there is no way at this moment to give each tile different Zorder so all tiles of each tilemap object will have its Z order.  
+
+Then there comes animated tiles. Which are possible, but not in this extension since it aims for having multiple tilesets.  
+And adding additional tiles with animations would generate ultra huge atlas image.  
+But then we would face the isuse of checking each tile each frame and updating them, which we could narrow down to tiles that are on screen.  
+Still it would be very performance unfriendly.  
+
 # And that is all the logic behind creating tilesets.  
 # EVERY SINGE TILESET will follow same exact logic. If your tileset look odd ingame it means you did not follow these rules.  
 
@@ -293,7 +300,24 @@ Going from top to bottom:
 5 - use this action to create tile at whatever position you want. You can use X and Y pos of object you use in snap object to grid action from #2  
 Additionally it have 2 parameters. One where you see NumberVar that is where you put number which determine which set you want to use so it makes more sense to have there variable which value you can change on the fly. And one on end which says NO. If its set to yes it will update only one tile, and will try to connect it to any adjacent tile even if that tile is from different set. Where if its set to NO it will update all adjacent tile from tile at position you create tile, but will connect only sets to their own sets but not to others  
 6 - simply removing tile from current position  
-7 -  is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly  
+7 -  is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly ingame  
 
 <img width="1678" height="506" alt="image" src="https://github.com/user-attachments/assets/d8492a93-c0a5-48c6-b837-b7701e9782af" />
 
+
+# Section 4.3 Switching tilesets ingame
+
+Missing sets variable is how many sets i am missing (like i told you earlier that was made on purpose and this way we combat it).  
+With:  
+Q - we subtract 1 from NumberVar so we switch to previous tileset
+E - we add 1 to NumberVar so we switch to next tileset
+You see in ther actions expression that returns number of sets your tileset have TilemapName.AutoTile::SetsCount()  
+And it will loop around your tilesets perfectly fin on its own  
+C - we toggle boolean variable to control do tilesets should connect to other tilesets or not  
+In section 4.2 point 7 i explained that  
+
+<img width="1774" height="307" alt="image" src="https://github.com/user-attachments/assets/e6e5ded4-f653-4df3-bd74-86df026e682d" />
+
+
+And that is pretty much it. You are ready to use AutoTile as you please.  
+You can even try it in my [Test Game](https://gd.games/instant-builds/c533532b-8de9-4e33-bbab-c959f4ed9cff)
