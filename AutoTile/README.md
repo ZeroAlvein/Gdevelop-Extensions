@@ -1,10 +1,10 @@
 ## AutoTile Guide
 
 First thing first.  
-We will need some image editor i will go with Aseprite but [Libresprite](https://libresprite.github.io/#!/downloads) is its free earliler version which have all the feautres we need.  
+We will need some image editor. I will go with Aseprite but [Libresprite](https://libresprite.github.io/#!/downloads) is its free earliler version which have all the feautres we need.  
 In fact any image editor will be fine but Libre/Asesprite have grid support and that helps A LOT.
 
-Before we go we need to establish some names  
+Before we go we need to establish some names:  
 Tileset - colection (set) of your tiles that will build your shapes ingame  
 Tilemap - object in gdevelop that will use this extension and draw your tiles bsed on adjacent tiles to each tile  
 Tile - part of tileset that will build unique part of your image (for example bottom right corner)  
@@ -17,9 +17,9 @@ Ok let's go.
 # Section 1.1 Creating our tileset
 
 
-It's easier to understand how it works by using existing tileset with some pattern, where each tile have same exact pattern (its called bitmasking), so let's take some existing one which is this made of 9 tiles and each tile 16 pixels.  
+It's easier to understand how it works by using existing tileset with some pattern, where each tile have same exact pattern (its called bitmasking), so let's take some existing one which is this made of 9 tiles and each tile have 16 pixels.  
 I go to Vew > Grid > Grid Settings and in X and Y i put 16 px (Using Asperite/Librespirte).  
-(I upscaled 4 times so its more visible).
+(I upscaled it 4 times so its more visible).
 
 <img width="192" height="192" alt="image" src="https://github.com/user-attachments/assets/e21ecfb8-8621-470c-8b59-7d78b95b6550" />
 
@@ -33,9 +33,9 @@ And we have it on nice blue grid which show us each tile.
 
 But if you pay attention, some parts of it actually repeats. like always white head is in bottom right corner on each tile and dark one is always in top left.  
 And here is all magic behind it, we can re use these parts of each tile and build ONE tile from 1/4 chunks of other tiles (sub tiles).  
-So in reality we only need unique 1/4 parts of each tile, And now we gonna reduce it to 8 tiles (which in fact will be 24 sub tiles).
+So in reality we only need 1/4 unique parts (sub tiles) of each tile, And now we gonna reduce it to 8 tiles (which in fact will be 24 sub tiles).
 
-1st i went back to View > Grid > Grid setting and in whatever i had in X and Y i divided by 2 so i had there 16 i divide it by 2 and we get 8.  
+1st i went back to View > Grid > Grid setting and whatever i had in X and Y i divided by 2 so i had there 16 i divide it by 2 and we get 8.  
 Now repetition is A LOT more visible.
 
 <img width="460" height="428" alt="image" src="https://github.com/user-attachments/assets/8918f080-5140-41a2-8efd-bd95a461db6a" />
@@ -51,24 +51,24 @@ C - here we put them together so they use up less space
 D - we copy each corner sub tile (blue) and paste them together in top left then copy all 4 center sub tiles and paste them in top right  
 
 Top left sub tiles are what create our SINGLE tile in game, so instead of it looking like 4 corrners put together.  
-We can give it unique look by editing thse 4 sub tiles without affecting how rest of tiles will look.  
+We can give it unique look by editing thse 4 sub tiles without affecting how corner sub tiles will look.  
 I will demostrate it later so do not worry.
-Top right sub tiles are called inner corners but we gonna get into that in next sectiion.  
+Top right sub tiles are called inner corners but we gonna get into that in next section.  
 
 **PRO TIP #1**  
 In Ase/Libresprite when you have selected selection tool (top most tool in tollbox on right).  
-You can either double LEFT or MIDDLE mouse button click on any tile on that blue grid to select it.  
+You can either double LEFT or MIDDLE mouse button click on any tile on that blue grid to select whole tile.  
 If you hold LMB/MMB on 2nd click you can drag it to expand grid selection, and then when holding shift add more to selection.  
 
 **PRO TIP #2**  
-In Ase/Libresprite when you have some selection, you can hold shift and press arrow keys to move it on your grid.  
+In Ase/Libresprite when you have some selection, you can hold shift and press arrow keys to move it by grid tile size.  
 
 <img width="1296" height="726" alt="image" src="https://github.com/user-attachments/assets/4825d315-44c7-4cf5-a125-98ec0b2be1d5" />
 
 
 # Section 1.3 Creating inner corners
 
-Best to explain what inner corners are is by looking at tiles placed in cross shape  
+Best to explain what inner corners are is by looking at tiles placed in cross shape.  
 
 <img width="1295" height="694" alt="image" src="https://github.com/user-attachments/assets/5315ef8c-b249-47be-b91a-f977ef65827d" />
 
@@ -80,14 +80,14 @@ Before on left and after editing on right.
 
 Easier to spot it is on tileset that is thinner and have clear pattern. We only focus on RED/ORANGE colored tile.  
 
-A - top right tile (4 inner corners sub tiles) is just our center tile. we need to take edge tiles and put them in shape of cross  
-B - after having cross shape we put inner corners tile in center it totally do not fit  
+A - top right tile (4 inner corners sub tiles) is just our center tile. We need to take edge tiles and put them in shape of cross  
+B - after having cross shape, we put inner corners tile in center and it totally do not fit  
 C - we simply adjust it to our needs, so it looks like each corner perfectly fit each arm  
 D - we put back our inner corners tile into top right spot  
 
 <img width="1297" height="740" alt="image" src="https://github.com/user-attachments/assets/b89711aa-8f3d-483b-bfd4-0e4967f17886" />
 
-And now you learn the full layout of each tileset.  
+And you just learned full layout of each tileset.  
 Top left tile = single tile  
 Top right tile = our inner corners tile  
 And what is below are our walls + corners + center tiles  
@@ -139,7 +139,7 @@ But i don't like how single tile looks, and the fact that if i make cross shape 
 <img width="980" height="677" alt="image" src="https://github.com/user-attachments/assets/94a05e30-334f-433f-b75d-1cdcc7ac190f" />
 
 Believe or not we can fix it.  
-To fix single tile, we just editing top left tile on our tileset.  
+To fix single tile, we just edit top left tile on our tileset.  
 BUT for for fixing it going inwards we can do simply swap position of each wall sub tiles on their axis.  
 I literaly just swapped their positions nothing more.  
 To be clear what i did to top and bottom walls i also did to left and right walls.  
@@ -163,7 +163,7 @@ And here we go.
 <img width="1294" height="710" alt="image" src="https://github.com/user-attachments/assets/b199e62d-b7bc-4925-a780-58775a198386" />
 
 On bottom i marked in red rectangle whole tiles built from 4 sub tiles, and we see that always yellow sub tile is in upper right corner of tile.  
-Dark blue will always be in top left corner fo tile and so go on.  
+Dark blue will always be in top left corner of tile and so go on.  
 
 <img width="850" height="685" alt="image" src="https://github.com/user-attachments/assets/472df9a8-8cf7-4103-bdbe-bc0a16f4694a" />
 
@@ -203,9 +203,9 @@ Where other limitation is the repetition. We cannot spread vertical pieces horiz
 <img width="1443" height="845" alt="image" src="https://github.com/user-attachments/assets/17ce5195-a2bc-47ce-863b-2ba02098bdea" />
 
 So in other words, you can draw fences only as hollow shapes empty inside, or you gonna get visual bug you see at bottom row.  
-Last column should help you visualise what i did.  
+Last column should help you visualize what i did.  
 
-Also there is no way at this moment to give each tile different Zorder so all tiles of each tilemap object will have its Z order.  
+Also there is no way at this moment to give each tile different Z order so all tiles of each tilemap object will have its Z order.  
 
 Then there comes animated tiles. Which are possible, but not in this extension since it aims for having multiple tilesets.  
 And adding additional tiles with animations would generate ultra huge atlas image.  
@@ -213,7 +213,7 @@ But then we would face the isuse of checking each tile each frame and updating t
 Still it would be very performance unfriendly.  
 
 # And that is all the logic behind creating tilesets.  
-# EVERY SINGE TILESET will follow same exact logic. If your tileset look odd ingame it means you did not follow these rules.  
+# EVERY SINGE TILESET will follow same exact logic. If your tileset look odd ingame it means you did not follow everything i explained above.  
 
 
 # Section 2.1 Multiple tilesets in atlas image
@@ -228,7 +228,7 @@ It does not matter will you have more vertically or horizontally, extension will
 You can even have just one vertical or horizontal strip of tilesets and it will still work.  
 
 Only rule you need to follow is fill your sets from left to right then next row down.  
-And as you see i am missing few tilesets and that is in purpose so you can learn you don't need to have even amount of tilesets.  
+And as you see i am missing few tilesets and that is on purpose so you can learn you don't need to have even amount of tilesets.  
 On top of that you can even skip empty tilesets ingame when switching between them but i will explain it later.  
 
 # Section 2.2 Propper size  
@@ -244,15 +244,15 @@ IDK if it is a bug or just how engine works, BUT each time i changed size of my 
 - double click my tilemap object  
 - and press APPLY  
 
-Otherwise my image was not update for new size and i could not select new tilesets.  
+Otherwise my image was not updated for new size and i could not select new tilesets.  
 Image itself if i draw anything on it was updated normally, but changing its size required steps i mentiond above.  
 Just so you are aware what to do after you change dimensions/size of your tile atlas image.  
 
 # Section 3.1 Setting up tilemap object
 
 In tilemap object we need to do 3 things (4th is optional).  
-A - name properly our tilemap object (later you gonna wanna have background tilesets object tilesets and stuff like that so propper naming is crucial)  
-B - My tileset is made of 16 x 16 tiles and what i need to put in tile size is 8 cause 16 / 2 = 8 so we need to put there size of our sub tiles  
+A - name properly our tilemap object (later you gonna have background tilesets objects and stuff like that so propper naming is crucial)  
+B - my tileset is made of 16 x 16 tiles and what i need to put in tile size 8 cause 16 / 2 = 8 so we need to put there size of our sub tiles  
 C - select our tile atlas image with our tilesets  
 D - we can click here on our tiles and they will be marked in red to indicate which are colliders. And so they will work with seperate two object action and object is in collision with tilemap object but also work as platform if we add to it platform behavior.  
 
@@ -262,7 +262,7 @@ D - we can click here on our tiles and they will be marked in red to indicate wh
 
 A - we click on burger icon in top left  
 B - then + next to extensions  
-C - import extension button  
+C - import extension button and select AutoTile.json
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/45d00dac-ec4c-4cfa-a8b9-783845764abd" />
 
@@ -274,33 +274,36 @@ Here all we need to do is put same exact number in Tile size as we put in tilema
 
 <img width="1245" height="363" alt="image" src="https://github.com/user-attachments/assets/f48a022b-19b0-4c6c-88ff-89706472f178" />
 
-This option "Enable AutoTile" needs to be checked for tiles to auto connect.
+This option "Enable AutoTile" needs to be checked for tiles to auto connect.  
 This extension have save/load functionality i will explain later, and its so it work properly with tilemap objects which you would use in normal way.  
-Where each tile is one image of something for example decorations or whatever.  These most likely should not auto tile.  
+Where each tile is one image of something for example decorations like stone/flower/chest or whatever. These most likely should not auto tile.  
+In that case you un check "Enable AutoTile" and you can still paint tiles and remove them and save/load. but they will not auto connect.  
 
 # Section 4.1 Managing our tilemap via events sheet  
 
 Tilemap object is like canvas on which you can paint your tiles, so 1st we would need to drag our tilemap object into our scene.  
-But then it gives us nothing we would also need to draw any tile at top left and bottom right corners (or top right and bottom left).  
-That is how we establish our canvas. But there is nothing for us to be allowed to draw tiles beyond our canvas.  
+But then it gives us nothing we would also need to draw any tile at top left and bottom right corners (or top right and bottom left) for space we consider our game area (think like setting area for how far your map will spread).  
+That is how we establish our canvas. But there is nothing to allow us to  draw tiles beyond our canvas (beyond tiemap object).  
 But we can change position of our tilemap object, and there is action for tilemap object to change its row and column count.  
 In other words we can set our canvas in events sheet and i strongly suggest you do that.  
 
-We have ehre bunch of my events that create and properly set up my tilemap object in my scene.  
+We have here bunch of my events that create and properly set up my tilemap object in my scene.  
 
 <img width="1408" height="195" alt="image" src="https://github.com/user-attachments/assets/9678176b-a8c5-493a-8eae-6d8694da70f8" />
 
 
 # Section 4.2 Painting our tiles
 
-My events for managing tilesets via event.  
-Going from top to bottom:  
+My events for managing tilesets via event:  
 1 - is for removing all tiles from selected tilemap object  
 2 - when holding shift we snap SOME object to tilemap grid in case we need better indication of of where we gonna place tile, and we hide actual cursor  
+Be aware ALWAYS when you add action you need to 1st click on tilemap object on left then you will see actions of behaviors of that object  
+So do not wonder why when you click add action then you look for snap to tilemap grid action magically you can't find it  
 3 - we do oppposite to what we did in 2 if shift is not pressed  
-4 - this will update ALL tiles in selected tilemap **BE AWARE THE BIGGER TILEMAP YOU HAVE AND MORE TILES ON IT THE LONGER IT WILL TAKE SO LAG!!!**  
+4 - this will update ALL tiles in selected tilemap **BE AWARE THE BIGGER TILEMAP YOU HAVE AND MORE TILES ON IT THE LONGER IT WILL TAKE SO EXPECT LAG!!!**  
+Better to avoid it if you don't need it and that is exactly why i made save/load system for tilemap objects  
 5 - use this action to create tile at whatever position you want. You can use X and Y pos of object you use in snap object to grid action from #2  
-Additionally it have 2 parameters. One where you see NumberVar that is where you put number which determine which set you want to use so it makes more sense to have there variable which value you can change on the fly. And one on end which says NO. If its set to yes it will update only one tile, and will try to connect it to any adjacent tile even if that tile is from different set. Where if its set to NO it will update all adjacent tile from tile at position you create tile, but will connect only sets to their own sets but not to others  
+Additionally it have 2 parameters. One where you see NumberVar that is where you put number which determine which set you want to use so it makes more sense to have there number variable which value you can change on the fly. And one on end which says NO. If its set to YES it will update only one tile, and will try to connect it to any adjacent tile even if that tile is from different set. Where if its set to NO it will update all adjacent tile from tile at position you create tile, but will connect only sets to their own sets but not to others  
 In 95% of cases you want to have it set to NO  
 6 - simply removing tile from current position  
 7 - is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly ingame  
@@ -314,10 +317,11 @@ Missing sets variable is how many sets i am missing (like i told you earlier tha
 With:  
 Q - we subtract 1 from NumberVar so we switch to previous tileset
 E - we add 1 to NumberVar so we switch to next tileset
-You see in ther actions expression that returns number of sets your tileset have TilemapName.AutoTile::SetsCount()  
-And it will loop around your tilesets perfectly fin on its own  
+You see in ther actions expression that returns number of sets our tileset have TilemapName.AutoTile::SetsCount()  
+And it will loop around your tilesets perfectly fine on its own, we are only subtracting from sets count amount of sets we are missing  
+Otherwise it would loop around how much sets your atlas image could have so even trough empty ones  
 C - we toggle boolean variable to control do tilesets should connect to other tilesets or not  
-In section 4.2 point 7 i explained that  
+In section 4.2 point 7 i explained that where i demonstrate it in section 6.1  
 
 <img width="1774" height="307" alt="image" src="https://github.com/user-attachments/assets/e6e5ded4-f653-4df3-bd74-86df026e682d" />
 
@@ -326,10 +330,10 @@ And that is pretty much it. You are ready to use AutoTile as you please.
 You can even try it in my [Test Game](https://gd.games/instant-builds/e127d524-9f91-4d49-b5dc-986cae7f1e09)
 
 
-# Section 5.1 Saving/Loading our tilemap tiles to and from JSON file
+# Section 5.1 Saving/Loading our tilemap tiles to/from JSON file
 
 One of best feeature this extension have is to save/load all your tiles.  
-But we are not talking as custom level editor for your players.  
+But we are not talking about custom level editor for your players.  
 Nah we are talking here about YOU as game creator creating your levels/maps/backgrounds/platforms/decoratiions and whatever else INGAME.  
 Then you export all that to a file and put it inside your project folder and now all your users will play level you made.  
 Did you click my Test Game link above? You see all these trees water mountains and stuff?  You think i did it in scene editor? You would be wrong.  
