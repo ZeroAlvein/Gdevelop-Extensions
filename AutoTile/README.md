@@ -349,7 +349,7 @@ Other half way solution is to open your cloud project on desktop app and import 
 And then you could continue to work on whatever version you have.  
 
 BUT you can import json file into your cloud project via google drive or one drive. So you could have many dummy/empty json files in your project.  
-Name them properly and save to tile data to them this way.  
+Name them properly and save tile data to them this way.  
 YET do not ask me how exactly i never dealt with cloud stuff and i try to stay away from it.  
 
 Ok let's go.  
@@ -358,32 +358,37 @@ This is actually pretty straight forward there are 2 actions one to save to json
 
 <img width="1444" height="275" alt="image" src="https://github.com/user-attachments/assets/710fea6f-e309-4c93-8830-bcce643c3447" />
 
-JSON files save with this naming YourSceneName + YourTilemapObjectName + "Text you input manually can be empty if you leave it with just "" " + .json.  
-So if i have scene called Castle and tileset called Decorations and i leave text empty then i gonna get on my desktop file named CastleDecorations.json.  
-Text is there in case you have many extenral layouts but only one game scene and you side load them to change level.  
+JSON files are saved on desktop with this naming YourSceneName + YourTilemapObjectName + "Text or variable or leave it empty with "" " + .json.  
+So if i have scene called Castle and tilemap object called Decorations leaveing text empty then i get on my desktop file named CastleDecorations.json.  
+Text is there in case you have many extenral layouts but only one game scene and you side load them to change levels.  
 Then you could put in that text for example ToNumber(GameSave.CurrentLevel) and now your file would be named GameSceneDecorations1.json.  
-And now all we do is take our newly created json file and put it in some folder in our project folder, then just select it in load action.  
+Or maybe you want to save multiple layouts of your tilemaps and you want to give them unique neames? Whatever.  
+And now all we do is take our newly created json file from desktop and put it in some folder in our project folder, then just select it in load action.  
 
 <img width="719" height="386" alt="image" src="https://github.com/user-attachments/assets/55f85529-a096-4fad-a070-2c0fb0fde603" />
 
-# Section 5.2 Saving/Loading our tilemap tiles to and from storage
+# Section 5.2 Saving/Loading our tilemap tile data to and from storage
 
 This open doors for any1 who is not using desktop app to saving tile data into json file that is in your project resources.  
 But i lack the knowledge how to even manage google or one drive. IDK how file loading works into project from them.  
+But i bet asking on forums "how to add file to my project in cloud" will help.  
 
-Anyway saving/loading to and from storage is also straight forward. You just provide name of Storage and Group.  
+Anyway saving/loading to/from storage is also straight forward. You just provide name of Storage and Group.  
 Think like this:  
 Storage = main folder
 Group = sub folder of main folder
 
 <img width="1490" height="220" alt="image" src="https://github.com/user-attachments/assets/ecd6be38-848b-4024-8b84-e2c0f2583d17" />
 
-At this can be also used as custom level editor for your players so they can design their own levels.
+And this can be also used as custom level editor for your players so they can design their own levels and play them.  
+Actually i could add feature where it exports all tile data to text input object. And from that you can literally copy it.  
+Then you could send it to me on discord for example, i could paste it into text input object in my game and that is how i would load your leve in my game.  
+If there will be demand for this feature i gonna add it.  
 
 # Section 6.1 Connecting tilesets paramter in create tile action
 
-Imagine we are making topdown game then it would most sense to have 2 tilemaps or 3 but let's go with 2.  
-For example one for ground/dirt paht/water/lava/mountain walls and whatever else you can think off.  
+Imagine we are making topdown game, then it would make most sense to have 2 tilemaps or 3 but let's go with 2.  
+For example one for ground/dirt path/water/lava/mountain walls and whatever else you can think off.  
 But then having 2nd tilemap object with tilesets for trees/flowers/mountains/buildings/town walls/houses and whatever else.  
 We would create kinda like 2 layer system so tiles from one tilemap do not affect tiles form other tilemap.  
 BUT if you have huge tilemap you start to look for ways to fake it having more than it looks like.  
@@ -401,7 +406,7 @@ Then i switch to tileset #55 and i will draw solid green tiles inside inner part
 
 <img width="976" height="679" alt="image" src="https://github.com/user-attachments/assets/c3356ea1-537a-4cbd-964c-7be7c45c4ceb" />
 
-And now i press C to enable tiles connecting to tiles from different tilesets and draw lines on inner walls we gonna get.  
+And now i press C to enable tiles connecting to tiles from different tilesets and draw lines on inner walls and we gonna get.  
 
 <img width="979" height="832" alt="image" src="https://github.com/user-attachments/assets/b934a08a-ff4e-4e3d-be97-ed9a85bd34a4" />
 
@@ -413,7 +418,7 @@ I want to point out here again that using 2 tilemaps and splitting tilesets betw
 Cause as you see i needed to paint green backgroudn on my sets for everything to match, but if i would have there transparent color and two tilemaps.  
 I could put for example trees on any sufrace would it be grass or dirt path or whatever even on water.
 
-There are plenty of creative ways to achieve cool looking levles.  
+There are plenty of creative ways to achieve cool looking levles/maps.  
 
 # Section 6.1 using two tilesets to fake height
 
@@ -423,7 +428,9 @@ For example we want mountain walls that indicate higher elevation or building wa
 
 <img width="1545" height="768" alt="image" src="https://github.com/user-attachments/assets/d726d00a-257f-42d1-a347-cb9721a62cb1" />
 
-What you see here are 4 tilesets actually. On left these 2 sets where right one is top and bottom one is one from the left painted two lines below 1st one.  
+What you see above is made from 4 tilesets.  
+
+Now look on image below. You see dark and white brick they made left shape in image above. Where i simply painted 2 lines of dark bricks below white ones.  
 
 <img width="612" height="441" alt="image" src="https://github.com/user-attachments/assets/532611a8-98e8-41fb-9c65-a428a0702b8c" />
 
@@ -432,7 +439,7 @@ You could even fake shadows this way.
 
 <img width="735" height="544" alt="image" src="https://github.com/user-attachments/assets/24b9de73-9c8e-4676-9982-d025b49ba536" />
 
-That is all you need to know to use this extension and AutoTile yoursef.
+That is all you need to know to use this extension so go AutoTile yoursef.
 
 Enjoy <('.'< )  
 De Ent
