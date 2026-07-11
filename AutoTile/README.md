@@ -9,7 +9,8 @@ Tileset - colection (set) of your tiles that will build your shapes ingame
 Tilemap - object in gdevelop that will use this extension and draw your tiles bsed on adjacent tiles to each tile  
 Tile - part of tileset that will build unique part of your image (for example bottom right corner)  
 Sub tile - 1/4 part of whole tile  
-Tile atlas/atlas image - image containing all your tilesets
+Tile atlas/atlas image - image containing all your tilesets  
+Tile data - ID's and position of all your tiles on your tilemap object  
 
 Ok let's go.
 
@@ -299,8 +300,9 @@ Going from top to bottom:
 4 - this will update ALL tiles in selected tilemap **BE AWARE THE BIGGER TILEMAP YOU HAVE AND MORE TILES ON IT THE LONGER IT WILL TAKE SO LAG!!!**  
 5 - use this action to create tile at whatever position you want. You can use X and Y pos of object you use in snap object to grid action from #2  
 Additionally it have 2 parameters. One where you see NumberVar that is where you put number which determine which set you want to use so it makes more sense to have there variable which value you can change on the fly. And one on end which says NO. If its set to yes it will update only one tile, and will try to connect it to any adjacent tile even if that tile is from different set. Where if its set to NO it will update all adjacent tile from tile at position you create tile, but will connect only sets to their own sets but not to others  
+In 95% of cases you want to have it set to NO  
 6 - simply removing tile from current position  
-7 -  is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly ingame  
+7 - is the same as #5, but as you see instead of setting it in events you can put there boolean variable to switch it on the fly ingame  
 
 <img width="1678" height="506" alt="image" src="https://github.com/user-attachments/assets/d8492a93-c0a5-48c6-b837-b7701e9782af" />
 
@@ -321,3 +323,107 @@ In section 4.2 point 7 i explained that
 
 And that is pretty much it. You are ready to use AutoTile as you please.  
 You can even try it in my [Test Game](https://gd.games/instant-builds/e127d524-9f91-4d49-b5dc-986cae7f1e09)
+
+
+# Section 5.1 Saving/Loading our tilemap tiles to and from JSON file
+
+One of best feeature this extension have is to save/load all your tiles.  
+But we are not talking as custom level editor for your players.  
+Nah we are talking here about YOU as game creator creating your levels/maps/backgrounds/platforms/decoratiions and whatever else INGAME.  
+Then you export all that to a file and put it inside your project folder and now all your users will play level you made.  
+Did you click my Test Game link above? You see all these trees water mountains and stuff?  You think i did it in scene editor? You would be wrong.  
+I did it in game and exported my tiles to .json file then simply imported it in game and loaded at beginning of scene.  
+Exact same way as you would import audio file.  
+
+## BUT SAVING (exporting file) ONLY WORKS ON DESKTOP  
+Unfortunately for any other version saving will not work. Where loading will.  
+
+There is alternative since my extension have built in saving/loading to and from storage.  
+So you could use firebase to export your tiles and then load them when needed but that will make game require internet connectivity.  
+Other half way solution is to open your cloud project on desktop app and import all json files you need so they are stored on cloud.  
+And then you could continue to work on whatever version you have.  
+
+BUT you can import json file into your cloud project via google drive or one drive. So you could have many dummy/empty json files in your project.  
+Name them properly and save to tile data to them this way.  
+YET do not ask me how exactly i never dealt with cloud stuff and i try to stay away from it.  
+
+Ok let's go.  
+
+This is actually pretty straight forward there are 2 actions one to save to json and one to load from json.  
+
+<img width="1444" height="275" alt="image" src="https://github.com/user-attachments/assets/710fea6f-e309-4c93-8830-bcce643c3447" />
+
+JSON files save with this naming YourSceneName + YourTilemapObjectName + "Text you input manually can be empty if you leave it with just "" " + .json.  
+So if i have scene called Castle and tileset called Decorations and i leave text empty then i gonna get on my desktop file named CastleDecorations.json.  
+Text is there in case you have many extenral layouts but only one game scene and you side load them to change level.  
+Then you could put in that text for example ToNumber(GameSave.CurrentLevel) and now your file would be named GameSceneDecorations1.json.  
+And now all we do is take our newly created json file and put it in some folder in our project folder, then just select it in load action.  
+
+<img width="719" height="386" alt="image" src="https://github.com/user-attachments/assets/55f85529-a096-4fad-a070-2c0fb0fde603" />
+
+# Section 5.2 Saving/Loading our tilemap tiles to and from storage
+
+This open doors for any1 who is not using desktop app to saving tile data into json file that is in your project resources.  
+But i lack the knowledge how to even manage google or one drive. IDK how file loading works into project from them.  
+
+Anyway saving/loading to and from storage is also straight forward. You just provide name of Storage and Group.  
+Think like this:  
+Storage = main folder
+Group = sub folder of main folder
+
+<img width="1490" height="220" alt="image" src="https://github.com/user-attachments/assets/ecd6be38-848b-4024-8b84-e2c0f2583d17" />
+
+At this can be also used as custom level editor for your players so they can design their own levels.
+
+# Section 6.1 Connecting tilesets paramter in create tile action
+
+Imagine we are making topdown game then it would most sense to have 2 tilemaps or 3 but let's go with 2.  
+For example one for ground/dirt paht/water/lava/mountain walls and whatever else you can think off.  
+But then having 2nd tilemap object with tilesets for trees/flowers/mountains/buildings/town walls/houses and whatever else.  
+We would create kinda like 2 layer system so tiles from one tilemap do not affect tiles form other tilemap.  
+BUT if you have huge tilemap you start to look for ways to fake it having more than it looks like.  
+Again link to my [Test Game](https://gd.games/instant-builds/e127d524-9f91-4d49-b5dc-986cae7f1e09)  
+
+I used there ONE tilemap object and only these tilesets  
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/65e0a440-8c75-472a-a12c-c2e32a2f502b" />
+
+Now look i will press Q to switch to tileset #58 and draw rectangle worth of 2 tile size.  
+
+<img width="1083" height="668" alt="image" src="https://github.com/user-attachments/assets/da0731bc-e551-4e66-b233-246311819605" />
+
+
+Then i switch to tileset #55 and i will draw solid green tiles inside inner part of that rectangle  
+
+<img width="976" height="679" alt="image" src="https://github.com/user-attachments/assets/c3356ea1-537a-4cbd-964c-7be7c45c4ceb" />
+
+And now i press C to enable tiles connecting to tiles from different tilesets and draw lines on inner walls we gonna get.  
+
+<img width="979" height="832" alt="image" src="https://github.com/user-attachments/assets/b934a08a-ff4e-4e3d-be97-ed9a85bd34a4" />
+
+And that is exaclty how i created that whole layout/leve whatever you name it. That you see when you launch my test game. 
+
+<img width="1918" height="1024" alt="image" src="https://github.com/user-attachments/assets/01215b70-13f3-4a3a-8ea0-462657a717e8" />
+
+# Section 6.1 using two tilesets to fake height
+
+I simplified meaning of it, but due lower count of unique tiles in tilesets you will need to use multiple tilesets to create some shapes.  
+
+For example we want mountain walls that indicate higher elevation or building walls that looks like actual walls with something on top.  
+
+<img width="1545" height="768" alt="image" src="https://github.com/user-attachments/assets/d726d00a-257f-42d1-a347-cb9721a62cb1" />
+
+What you see here are 4 tilesets actually. On left these 2 sets where right one is top and bottom one is one from the left painted two lines below 1st one.  
+
+<img width="612" height="441" alt="image" src="https://github.com/user-attachments/assets/532611a8-98e8-41fb-9c65-a428a0702b8c" />
+
+Where shape on right are last two tilests from tile atlas image following same logic.  
+You could even fake shadows this way.  
+
+<img width="735" height="544" alt="image" src="https://github.com/user-attachments/assets/24b9de73-9c8e-4676-9982-d025b49ba536" />
+
+That is all you need to know to use this extension and AutoTile yoursef.
+
+Enjoy <('.'< )  
+De Ent
+- 
