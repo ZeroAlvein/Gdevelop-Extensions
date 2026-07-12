@@ -1,40 +1,98 @@
-Formatter functionality
--
+# Formatter functionality
+<br>  
 
+*All expressions goes into change text of text object action.  
+To have separators empty leave them with ""*  
+<br>  
 
-## Adding separators to numbers Formatter::AddSeparator(Number,".")
+## Adding separators to numbers  
+> Formatter::AddSeparator(Number,"Separator")  
+<br>  
 
-Imagine you have variable called Score with long number 1234567890 and you would wish to add some kind of separator each 3 digits from right side.  
-Not a problem.  
+In `Number` put your number variable.  
+In `Separator` put what kind of separator you want to use.  
 
-Into action to change text of text object put Formatter::AddSeparator(Your number here,"Your separator here")  
-So for example Formatter::AddSeparator(Score,".") and text object will display 1.234.567.890  
-Or try Formatter::AddSeparator(Score," -X- ") and text object will display 1 -X- 234 -X- 567 -X- 890  
+For example we have variable called Gold with value 1234567890 and we want to turn it into 1.234.567.890   
+> Formatter::AddSeparator(Gold,".")
+<br> 
 
-## Adding blinker to text Formatter::Blinker(Time("sec"),":","")
-If you have some in game timer and you want to display for example 15:20 where : actually blink  
-Then into change text of text object action put:  
-Formatter::Blinker(Your time in seconds, "first blinker" , "second blinker")  
-For example Formatter::Blinker(Time("sec"),":","")  
+How about not . period as separator but , comma instead so we get 1,234,567,890  
+> Formatter::AddSeparator(Gold,",")
+<br> 
 
-One blinker is visible on 0 2 4 6 8 secs where other is on 1 3 5 7 9  
-So if you set one to "" it will look like it shows and disappear  
-But you could make fake like spinning cross if you would go with Formatter::Blinker(Time("sec"),"+","x") 
+Maybe space for separator? So we get 1 234 567 890  
+> Formatter::AddSeparator(Gold," ")
+<br>  
 
-## Displaying ingame FPS Formatter::FPS()
+## Display FPS
+> Formatter::FPS()  
+<br>   
 
-You literally just put that expression Formatter::FPS() into change text action of text object
+## Format and add suffix to big numbers  
+> Formatter::FormatNumber(Number,"First Separator",Decimal,"Second Separator")
+<br>   
 
-## Format and add suffix to big numbers Formatter::FormatNumber(Score,".",0,"")
+In `Number` put your number variable.  
+In `First Separator` put what kind of separator you want to use. (For example "." will show 1.1)  
+In `Decimal` put how many decimal digits you want to see. (For example 2 will show 1.11M and 3 will show 1.111M where 0 will show 1M)  
+In `Second Separator` put how many decimal digits you want to see. (For example "" will show 1.1K but " " will show 1.1 K)  
 
-Imagine you have big number and you want anything above 999 to display with suffix like we have 1411 format to 1K or 1.4K or 1.411K  
-Even 1.4 k  
+We have variable Money with value 98765 and we want to get 98K
+> Formatter::FormatNumber(Money,"",0,"")  
+<br>   
 
-For example put this into change text of text object Formatter::FormatNumber(Score,".",0,"")  
-If score was 1234 then we gonna get 1K  
-If it was 12345 then we gonna get 12K  
-If it was 123456 then 123K  
-If it was 1234567 then 1M  
+Let's turn 98765 into 98.7K
+> Formatter::FormatNumber(Money,".",1,"")  
+<br>   
 
-Formatter::FormatNumber(Score,"first separator",0,"second separator") If we would display 1.23-k then period. is first separator  
-And minus- would be second separator where each you can set to "" to display nothing
+Let's turn 98765 into 98.7 K so we get space between our number and suffix (K)
+> Formatter::FormatNumber(Money,".",1," ")  
+<br>   
+
+Maybe turn 98765 into 98.76-K so we get - minus between our number and suffix (K)
+> Formatter::FormatNumber(Money,".",1,"-")  
+<br>   
+
+## Format your ingame time  
+>Formatter::GameTime(Hour,Minutes,Seconds)  
+<br>   
+
+This expression allows you to format time.  
+Useful if you made in game time flow and you want to display it in nice format. But will also format normal actual time Time("").  
+
+You need to add action to control formatting of your game time  
+
+<img width="1842" height="558" alt="image" src="https://github.com/user-attachments/assets/addcad15-a593-485d-a76d-a6e26737e3ad" />
+
+`Time format` can be 12H or 24H  
+`Length` allows you to choos do you wanna display only hour or hour: minutes or hour: minutes :seconds  
+`Separator ON` and `Separator OFF` will show/hide each second set one to ":" and other to "" and it will fake blinking  
+`AM Suffix` and `PM Suffix ` allow you to set what you want to see in 12h time on end "" would be nothing "PM" or "pm" you choose  
+<br>  
+
+## Pick random word from string of words comma separated  
+>Formatter::RandomWord("Text,Text,Text")  
+<br>   
+
+We have string of words for example "Cow,Dog,Cat,Shark"  
+And we want to pick random one from the pull.  
+Change text of text object with trigger once or at beginning of scene to this expression.  
+>Formatter::RandomWord("Cow,Dog,Cat,Shark")  
+<br>   
+
+## Display your device time in various formats
+> Formatter::Time(Number1,Number2,Separator ON, Separator OFF)  
+<br>  
+  
+In `Number1`  
+0 - will display hours with extra 0 in front if its below 10, so if it's one digit  
+1 - will display hours without extra 0 even if its one digit  
+2 - will display hours with extra 0 in front if its below 10, and AM/PM suffix on end  
+3 - will display hours without extra 0 even if its one digit, and AM/PM suffix on end  
+  
+In `Number2`  
+0 - will display only hours  
+1 - will display hours : minutes  
+2 - will display hours : minutes : seconds  
+
+In `Separator ON` and `Separator OFF` put in one ":" in other "" for it to blink each second
