@@ -70,15 +70,28 @@ You need to add action to control formatting of your game time
 `AM Suffix` and `PM Suffix ` allow you to set what you want to see in 12h time on end "" would be nothing "PM" or "pm" you choose  
 <br>  
 
-## Pick random word from string of words comma separated  
->Formatter::RandomWord("Text,Text,Text")  
+## Pick random word from string of words   
+>Formatter::RandomWord("Text,Text,Text","Separator")  
 <br>   
 
-We have string of words for example "Cow,Dog,Cat,Shark"  
-And we want to pick random one from the pull.  
-Change text of text object with trigger once or at beginning of scene to this expression.  
->Formatter::RandomWord("Cow,Dog,Cat,Shark")  
+Leave `Separator` as "" empty  
+And it will use ,commas as separator  
+> Formatter::RandomWord("Text,Text,Text","")
 <br>   
+
+Set your own separator to use it to separate words 
+>Formatter::RandomWord("Text+Text+Text","+")
+<br>   
+
+We have string of words for example Cow Dog Cat Shark   
+And we want to pick random one from it   
+>Formatter::RandomWord("Cow,Dog,Cat,Shark","")  
+<br>   
+
+We wanna do the same but with words separated by ?  
+>Formatter::RandomWord("Cow?Dog?Cat?Shark","?")
+<br> 
+
 
 ## Display your device time in various formats
 > Formatter::Time(Number1,Number2,Separator ON, Separator OFF)  
