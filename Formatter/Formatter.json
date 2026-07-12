@@ -1,6 +1,7 @@
 {
   "author": "ZeroX4",
   "category": "General",
+  "dimension": "",
   "extensionNamespace": "",
   "fullName": "Formatter",
   "gdevelopVersion": "",
@@ -802,7 +803,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get random word from string of words                          \nLike Minecraft splash word\n                                                                                             \nEach word needs to be separated by ONE comma ,\nFormatter::RandomWord(\"Cat,Dog,Cow\")\nFormatter::RandomWord(\"Sky,Boat,Tank,Ship\")",
+      "description": "Get random word from string of words                          \nSeparated by , comma by default\nFormatter::RandomWord(\"Word,Word\",\"\")                     \n                                                                                            \nSet your Separator to anything you want                    \nTo separate words with it                                       \nFormatter::RandomWord(\"Cat+Dog+Bird\",\"+\")\n                                                                                            \nFormatter::RandomWord(\"WordString\",\"Separator\")",
       "fullName": "Random word",
       "functionType": "StringExpression",
       "name": "RandomWord",
@@ -811,44 +812,163 @@
         {
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [],
-          "actions": [
+          "actions": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [],
+          "events": [
             {
-              "type": {
-                "value": "SetNumberVariable"
-              },
-              "parameters": [
-                "RNG",
-                "=",
-                "RandomInRange(0,StrFindLast(WordsString,\",\"))"
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Separator",
+                    "=",
+                    "\"\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetStringVariable"
+                  },
+                  "parameters": [
+                    "FakeSeparator",
+                    "=",
+                    "\",\""
+                  ]
+                }
               ]
             },
             {
-              "type": {
-                "value": "SetNumberVariable"
-              },
-              "parameters": [
-                "Start",
-                "=",
-                "StrFindFrom(\",\"+WordsString,\",\",RNG)"
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Separator",
+                    "=",
+                    "\"\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetStringVariable"
+                  },
+                  "parameters": [
+                    "FakeSeparator",
+                    "=",
+                    "Separator"
+                  ]
+                }
               ]
             },
             {
-              "type": {
-                "value": "SetNumberVariable"
-              },
-              "parameters": [
-                "End",
-                "=",
-                "StrFindFrom(WordsString+\",\",\",\",Start+1)"
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "RNG",
+                    "=",
+                    "RandomInRange(0,StrFindLast(WordsString,\",\"))"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Start",
+                    "=",
+                    "StrFindFrom(\",\"+WordsString,\",\",RNG)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "End",
+                    "=",
+                    "StrFindFrom(WordsString+\",\",\",\",Start+1)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetReturnString"
+                  },
+                  "parameters": [
+                    "SubStr(\",\"+WordsString+\",\", Start + 1,End - Start)"
+                  ]
+                }
               ]
             },
             {
-              "type": {
-                "value": "SetReturnString"
-              },
-              "parameters": [
-                "SubStr(\",\"+WordsString+\",\", Start + 1,End - Start)"
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "RNG",
+                    "=",
+                    "RandomInRange(0,StrFindLast(WordsString , FakeSeparator))"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Start",
+                    "=",
+                    "StrFindFrom(FakeSeparator +WordsString , FakeSeparator ,RNG)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "End",
+                    "=",
+                    "StrFindFrom(WordsString + FakeSeparator, FakeSeparator , Start + 1)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetReturnString"
+                  },
+                  "parameters": [
+                    "SubStr(FakeSeparator + WordsString + FakeSeparator , Start + 1,End - Start)"
+                  ]
+                }
               ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "FakeSeparator",
+              "type": "string",
+              "value": ""
             }
           ]
         }
@@ -860,6 +980,11 @@
         {
           "description": "WordsString",
           "name": "WordsString",
+          "type": "string"
+        },
+        {
+          "description": "Separator",
+          "name": "Separator",
           "type": "string"
         }
       ],
@@ -974,6 +1099,41 @@
       "objectGroups": []
     }
   ],
+  "eventsFunctionsFolderStructure": {
+    "folderName": "__ROOT",
+    "children": [
+      {
+        "functionName": "SetLargeNumberSuffix"
+      },
+      {
+        "functionName": "SetDeviceTimeSuffix"
+      },
+      {
+        "functionName": "SetGameTime"
+      },
+      {
+        "functionName": "AddSeparator"
+      },
+      {
+        "functionName": "Blinker"
+      },
+      {
+        "functionName": "FormatNumber"
+      },
+      {
+        "functionName": "FPS"
+      },
+      {
+        "functionName": "RandomWord"
+      },
+      {
+        "functionName": "GameTime"
+      },
+      {
+        "functionName": "Time"
+      }
+    ]
+  },
   "eventsBasedBehaviors": [],
   "eventsBasedObjects": []
 }
