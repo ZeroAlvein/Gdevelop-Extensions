@@ -803,7 +803,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get random word from string of words                          \nSeparated by , comma by default\nFormatter::RandomWord(\"Word,Word\",\"\")                     \n                                                                                            \nSet your Separator to anything you want                    \nTo separate words with it                                       \nFormatter::RandomWord(\"Cat+Dog+Bird\",\"+\")\n                                                                                            \nFormatter::RandomWord(\"WordString\",\"Separator\")",
+      "description": "Pick random word from string of words                          \nSeparated by , comma by default\nFormatter::RandomWord(\"Word,Word\",\"\")                     \n                                                                                            \nSet your Separator to anything you want                    \nTo separate words with it                                       \nFormatter::RandomWord(\"Cat+Dog+Bird\",\"+\")\n                                                                                            \nFormatter::RandomWord(\"WordString\",\"Separator\")",
       "fullName": "Random word",
       "functionType": "StringExpression",
       "name": "RandomWord",
