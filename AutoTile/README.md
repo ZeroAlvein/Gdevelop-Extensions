@@ -76,12 +76,12 @@ We can give it unique look by editing thse 4 sub tiles without affecting how cor
 I will demostrate it later so do not worry.
 Top right sub tiles are called inner corners but we gonna get into that in next section.  
 
-**PRO TIP #1**  
+> **PRO TIP #1**  
 In Ase/Libresprite when you have selected selection tool (top most tool in tollbox on right).  
 You can either double LEFT or MIDDLE mouse button click on any tile on that blue grid to select whole tile.  
 If you hold LMB/MMB on 2nd click you can drag it to expand grid selection, and then when holding shift add more to selection.  
 
-**PRO TIP #2**  
+> **PRO TIP #2**  
 In Ase/Libresprite when you have some selection, you can hold shift and press arrow keys to move it by grid tile size.  
 
 <img width="1296" height="726" alt="image" src="https://github.com/user-attachments/assets/4825d315-44c7-4cf5-a125-98ec0b2be1d5" />
