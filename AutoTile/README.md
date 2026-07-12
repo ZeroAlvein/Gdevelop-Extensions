@@ -1,5 +1,7 @@
 ## AutoTile Guide
 
+> This extension is meant for tilemap object and will not work with any other object.
+
 First thing first.  
 We will need some image editor. I will go with Aseprite but [Libresprite](https://libresprite.github.io/#!/downloads) is its free earliler version which have all the feautres we need.  
 In fact any image editor will be fine but Libre/Asesprite have grid support and that helps A LOT.
