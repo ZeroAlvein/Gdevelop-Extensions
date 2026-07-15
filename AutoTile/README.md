@@ -1,6 +1,13 @@
 ## AutoTile Guide
 
-> This extension is meant for tilemap object and will not work with any other object.
+> This extension is meant for tilemap object and will not work with any other object.<br>  
+
+Try it out in my [Test Game](https://gd.games/instant-builds/e127d524-9f91-4d49-b5dc-986cae7f1e09)<br>  
+- LMB to paint tile
+- RMB to remove tile
+- Z to remove all tiles
+- Q E to change set
+- C to toggle connecting tiles you create with ANY set
 
 First thing first.  
 We will need some image editor. I will go with Aseprite but [Libresprite](https://libresprite.github.io/#!/downloads) is its free earliler version which have all the feautres we need.  
