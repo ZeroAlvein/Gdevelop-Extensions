@@ -1,18 +1,24 @@
 {
   "author": "ZeroX4",
-  "category": "",
+  "category": "Game mechanic",
   "dimension": "",
   "extensionNamespace": "",
-  "fullName": "SaveLoadEasy",
+  "fullName": "Save Load Easy",
   "gdevelopVersion": "",
-  "helpPath": "",
+  "helpPath": "https://github.com/ZeroAlvein/Gdevelop-Extensions",
   "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLWNvbnRlbnQtc2F2ZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGQ9Ik0xNSw5SDVWNUgxNU0xMiwxOUEzLDMgMCAwLDEgOSwxNkEzLDMgMCAwLDEgMTIsMTNBMywzIDAgMCwxIDE1LDE2QTMsMyAwIDAsMSAxMiwxOU0xNywzSDVDMy44OSwzIDMsMy45IDMsNVYxOUEyLDIgMCAwLDAgNSwyMUgxOUEyLDIgMCAwLDAgMjEsMTlWN0wxNywzWiIgLz48L3N2Zz4=",
   "name": "SaveLoadEasy",
   "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/ed9dc9aba04820ae44e5adf70bd3b955cd899dec13739488e94ae6ef2b6ef180_content-save.svg",
   "shortDescription": "Save and Load easy",
   "version": "",
   "description": "Save and Load variables easy",
-  "tags": [],
+  "tags": [
+    "save",
+    "load",
+    "storage",
+    "variables",
+    "easy"
+  ],
   "authorIds": [
     "SoOZOqN0VgdXUsFHOtG7nUU2DNB2"
   ],
@@ -21,7 +27,7 @@
   "sceneVariables": [],
   "eventsFunctions": [
     {
-      "description": "Load variable from storage",
+      "description": "Load variable from storage.",
       "fullName": "Load",
       "functionType": "Action",
       "name": "Load",
@@ -87,7 +93,7 @@
           "type": "string"
         },
         {
-          "description": "Name of your Storage",
+          "description": "Name of your storage",
           "name": "StorageName",
           "type": "string"
         }
@@ -95,7 +101,7 @@
       "objectGroups": []
     },
     {
-      "description": "Save variable to storage",
+      "description": "Save variable to storage.",
       "fullName": "Save",
       "functionType": "Action",
       "name": "Save",
@@ -154,7 +160,7 @@
       "objectGroups": []
     },
     {
-      "description": "Delete group from storage",
+      "description": "Delete group from storage.",
       "fullName": "Delete group",
       "functionType": "Action",
       "name": "DeleteGroup",
@@ -191,7 +197,7 @@
       "objectGroups": []
     },
     {
-      "description": "Delete storage",
+      "description": "Delete storage.",
       "fullName": "Delete storage",
       "functionType": "Action",
       "name": "DeleteStorage",
@@ -222,7 +228,7 @@
       "objectGroups": []
     },
     {
-      "description": "Check if save exist",
+      "description": "Check if save exist.",
       "fullName": "Save exist",
       "functionType": "Condition",
       "name": "SaveExist",
