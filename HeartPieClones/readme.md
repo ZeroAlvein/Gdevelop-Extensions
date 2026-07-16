@@ -24,7 +24,7 @@ And i left some tips to help you adjust it to your needs, and you can click that
 
 ## Configuration  
 
-All images/frames of your heats or whatever, need to be added as one animation.  
+All images/frames of your clones, need to be added as one animation.  
 But you can have multiple animations for different purposes like boss or player 2 or enemies or some pickups (like i did with fish above).  
 
 I have fev animations with different fram count where frames have all fill states i care about.  
