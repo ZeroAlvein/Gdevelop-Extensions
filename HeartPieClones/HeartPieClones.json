@@ -42,7 +42,7 @@
   "eventsFunctions": [
     {
       "description": "Clones will be created if you change animation or health or clones count\nThis action should run every frame\nTips\n- set of images (different state/fill of your object) needs to be added as one animation\n- using expression in X and Y position add layer to expression for example CameraBorderLeft(\"UILayer\", ) or CursorX(\"CursorLayer\", )\n- inflict damage with SET TO max(YOURHPVar - 1 , 0 ) to block it from going below 0\n- replenish clones (heal) with set to min(YOURHPvar + 1 , clones * (frames - 1))\n- if you only want to create/delete clones then make 2 frames one for full clone other for empty\n- in above scenario you will need to set frames to 2 and now 1 HP = 1 clone\n- if clones fill in wrong order then set frames order to reverse\n- to control parameters which have only two choices with boolean variable put in them expression StrRepeat(\"Horizontal\",MyBoolVar)+StrRepeat(\"Vertical\",abs(MyBoolVar-1))\n- in above experession you need to put in qoutes what parameter expects so for frames order it would be \"Normal\" \"Reverse\"",
-      "fullName": "Create and Animate Heart Pie Clones",
+      "fullName": "Create and animate heart pie clones",
       "functionType": "Action",
       "group": "Heart Pie Clones",
       "name": "Create",
@@ -965,7 +965,7 @@
     },
     {
       "description": "Delete clones.",
-      "fullName": "Delete Clones",
+      "fullName": "Delete clones",
       "functionType": "Action",
       "group": "Heart Pie Clones",
       "name": "Delete",
