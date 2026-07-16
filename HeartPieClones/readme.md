@@ -37,23 +37,27 @@ Let's go with configuration of parameters 1 by 1.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ce65a71-bae9-4646-a483-3cdcbbede217" />
 
-1 - your sprite object
-2 - how many clones you want to create in tottal? And keep in mind you can have multiple lines so if you wanna have one line o 10  
-And in second line  you type here 12
-3 - profile is like tween identifier, Since you are using same object, but can have different sets of hearts, you need to identify them somehow.  
+1 - your sprite object  
+2 - how many clones you want to create in tottal? And keep in mind you can have multiple lines so if you wanna have one line of 10 and in second line 2 then you type here 12  
+3 - profile is like tween identifier, Since you are using same object, but can have different sets of clones, you need to identify them somehow.  
 4 - X position where to start from  
-5 - Y position where to start from
-6 - pick on which layer to create clones. (if you use in X and Y expression that can accept layer name then in them you put that layer also for example  
-CameraBorderLeft("Base layer", )  where something like Player.X() does not accept layers)  
+5 - Y position where to start from  
+6 - pick on which layer to create clones. (if you use in X and Y expression that can accept layer name then in them you put that layer also for example CameraBorderLeft("Base layer", ) where something like Player.X() does not accept layers)  
 7 - scale is basically size 1 is image original size  
-8 - how many pixels horizontally between each clone
+8 - how many pixels horizontally between each clone  
 9 - how many pixels vertically between each clone  
 10 - which animation (by number) to use for this set of clones  
 11 - how many frames/images animation you selected in #10 have  
-12 - if your frames start by empty on left and fill them up in right direction, here you can reverse that order, or do it on purpose to fake with variable  
+12 - if your frames start by empty on left and fill them up in right direction, here you can reverse that order, or do it on purpose to fake with variable 
 increasing something loosing hearts or charges (for example having boomerangs and displaying how many do you still have in your possesion)  
 
 <img width="1213" height="512" alt="image" src="https://github.com/user-attachments/assets/2d4041b0-beda-4f29-ae1e-0cdfcde334e1" />  
 
-13 - THIS and #14 #15 are most tricky parts 
+13 - in what orientation your clones will be filled  
+14 - in which horizontal direction create new clones from starting postion (ones in #4 #5)  
+15 - in which vertical direction create new clones from starting postion (ones in #4 #5)  
+16 - flip image of each clone horizontally?  
+17 - flip image of each clone vertically?
+18 - this will determine after how many clones create new line in direction you set in #14 #15  
+19 - here you put your health variable (can be expression for behavior for example from health behavior)
 
