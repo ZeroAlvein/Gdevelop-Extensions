@@ -27,7 +27,7 @@ And i left some tips to help you adjust it to your needs, and you can click that
 All images/frames of your clones, need to be added as one animation.  
 But you can have multiple animations for different purposes like boss or player 2 or enemies or some pickups (like i did with fish above).  
 
-I have fev animations with different fram count where frames have all fill states i care about.  
+I have few animations with different frames count where frames have all fill states i care about.  
 Order does not matter (is it going from left empty to right filled or vice versa) cause it can be changed in action.  
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b1f24f0a-852c-4f50-8ddb-7c1328799ab6" />
@@ -39,30 +39,30 @@ Let's go with configuration of parameters 1 by 1.
 
 1 - your sprite object  
 2 - how many clones you want to create in tottal? And keep in mind you can have multiple lines so if you wanna have one line of 10 and in second line 2 then you type here 12  
-3 - profile is like tween identifier, Since you are using same object, but can have different sets of clones, you need to identify them somehow.  
+3 - profile is like tween identifier, since you are using same object, but can have different sets of clones, you need to identify them somehow.  
 4 - X position where to start from  
 5 - Y position where to start from  
 6 - pick on which layer to create clones. (if you use in X and Y expression that can accept layer name then in them you put that layer also for example CameraBorderLeft("Base layer", ) where something like Player.X() does not accept layers)  
-7 - scale is basically size 1 is image original size  
+7 - scale is basically size where 1 is image original size  
 8 - how many pixels horizontally between each clone  
 9 - how many pixels vertically between each clone  
 10 - which animation (by number) to use for this set of clones  
-11 - how many frames/images animation you selected in #10 have  
+11 - how many frames/images animation you selected in #10 actually have  
 12 - if your frames start by empty on left and fill them up in right direction, here you can reverse that order, or do it on purpose to fake with variable 
 increasing something loosing hearts or charges (for example having boomerangs and displaying how many do you still have in your possesion)  
 
 <img width="1213" height="512" alt="image" src="https://github.com/user-attachments/assets/2d4041b0-beda-4f29-ae1e-0cdfcde334e1" />  
 
-13 - in what orientation clones will be created
+13 - in what orientation clones will be created  
 14 - in which horizontal direction create new clones from starting postion (ones in #4 #5)  
 15 - in which vertical direction create new clones from starting postion (ones in #4 #5)  
 
-> That is only confusing part of this configuration that need in depth explanation. Imagine like you wanna display two horziontal lines of clones at cursor position so at #13 set it to horizontal. Now in #14 if you set it to reight they will go from cursor position into RIGHT. But if you set it to left all clones will be created LEFT from cursor. Now in #15 if you set down then 2nd line will be BELOW 1st line, and if you set it to UP 2nd line will be created ABOVE 1st line.  
+> That is only confusing part of this configuration that needs in depth explanation. Imagine you wanna display two horziontal lines of clones at cursor position so at #13 set it to horizontal. Now in #14 if you set it to right they will go from cursor position into RIGHT. But if you set it to left all clones will be created LEFT from cursor. Now in #15 if you set down then 2nd line will be BELOW 1st line, and if you set it to UP 2nd line will be created ABOVE 1st line.  
 
 16 - flip image of each clone horizontally?  
-17 - flip image of each clone vertically?
+17 - flip image of each clone vertically?  
 18 - this will determine after how many clones create new line in direction you set in #14 #15  
-19 - here you put your health variable (can be expression for behavior for example from health behavior)
+19 - here you put your health variable (can be expression from behavior for example from health behavior)
 
 
 Few examples
@@ -72,15 +72,14 @@ B - same as above but at top right corner going into left direction
 
 <img width="1333" height="216" alt="image" src="https://github.com/user-attachments/assets/3a2a957e-a6bd-4906-83df-385caae230a7" />  
 
-C - created on left side of screen little above vertical center with two lines of vertical clones into right direction  
-D - same as above just created on right side and going into right direciton  
+C - created on left side of screen little above vertical center with two lines of vertical clones into right direction from top to bottom  
+D - same as above just created on right side and going into right direciton from top to bottom  
 
 <img width="1339" height="200" alt="image" src="https://github.com/user-attachments/assets/4bd7753e-1762-4707-9152-87dca1dcf21e" />
 
-Here we have bottom ones (skills) from my test game  
+Here we have bottom ones (skulls) from my test game  
 
-<img width="1205" height="183" alt="image" src="https://github.com/user-attachments/assets/3dc1faee-be4e-4f25-991e-a2b1d5c3d2b2" />
-
+<img width="1205" height="183" alt="image" src="https://github.com/user-attachments/assets/3dc1faee-be4e-4f25-991e-a2b1d5c3d2b2" />  
 
 And here something more advanced.  
 That is how i made ones you see when you hover cursor over player.  
@@ -95,9 +94,9 @@ If you want to do something to clones outside of extension you need to pick them
 
 <img width="1174" height="169" alt="image" src="https://github.com/user-attachments/assets/39f0aa65-6bf7-4f5c-8ecd-fbf240c2db1d" />
 
-This condition allows you to target ones with specific profile but you will still need to use repeat for each object.  
+This condition allows you to target ones with specific profile but you will still need to use repeat for each object (if you have other sets and don't want to affect them).  
 
-There is also delete clones action if you need it for whatever reason.
+There is also delete clones action. Useful for when you want clones to show only at certain conditions (for example what i did to ones when you hover cursor over player).  
 
 That's pretty much it.
 Enjoy <('.'< )
