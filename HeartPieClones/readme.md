@@ -5,7 +5,7 @@ For example hearts based on number variable (and more)*<br>
 
 
 Check it out in my [Test game](https://gd.games/instant-builds/37b76f97-d5d7-441e-ace8-a6dc0f87da03) try picking up fish.  
-That is cool trick to display how many items you gathered.  You move mouse wheel up and down to change number variable (Health)  
+That is cool trick to display how many items you gathered.  Move mouse wheel up and down to change number variable (Health)  
 Hover cursor over player <('.'< )
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3ae042a9-43d1-46f7-80dd-9ad8ad512e40" />  
