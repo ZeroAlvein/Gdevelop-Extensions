@@ -53,11 +53,51 @@ increasing something loosing hearts or charges (for example having boomerangs an
 
 <img width="1213" height="512" alt="image" src="https://github.com/user-attachments/assets/2d4041b0-beda-4f29-ae1e-0cdfcde334e1" />  
 
-13 - in what orientation your clones will be filled  
+13 - in what orientation clones will be created
 14 - in which horizontal direction create new clones from starting postion (ones in #4 #5)  
 15 - in which vertical direction create new clones from starting postion (ones in #4 #5)  
+
+> That is only confusing part of this configuration that need in depth explanation. Imagine like you wanna display two horziontal lines of clones at cursor position so at #13 set it to horizontal. Now in #14 if you set it to reight they will go from cursor position into RIGHT. But if you set it to left all clones will be created LEFT from cursor. Now in #15 if you set down then 2nd line will be BELOW 1st line, and if you set it to UP 2nd line will be created ABOVE 1st line.  
+
 16 - flip image of each clone horizontally?  
 17 - flip image of each clone vertically?
 18 - this will determine after how many clones create new line in direction you set in #14 #15  
 19 - here you put your health variable (can be expression for behavior for example from health behavior)
 
+
+Few examples
+
+A - created in top left corner of screen going into right direction with 2 lines of clones  
+B - same as above but at top right corner going into left direction  
+
+<img width="1333" height="216" alt="image" src="https://github.com/user-attachments/assets/3a2a957e-a6bd-4906-83df-385caae230a7" />  
+
+C - created on left side of screen little above vertical center with two lines of vertical clones into right direction  
+D - same as above just created on right side and going into right direciton  
+
+<img width="1339" height="200" alt="image" src="https://github.com/user-attachments/assets/4bd7753e-1762-4707-9152-87dca1dcf21e" />
+
+Here we have bottom ones (skills) from my test game  
+
+<img width="1205" height="183" alt="image" src="https://github.com/user-attachments/assets/3dc1faee-be4e-4f25-991e-a2b1d5c3d2b2" />
+
+
+And here something more advanced.  
+That is how i made ones you see when you hover cursor over player.  
+
+<img width="1889" height="574" alt="image" src="https://github.com/user-attachments/assets/db78d8ab-e205-44ef-88ff-de53991c4214" />
+
+I am adding to scene variable (ActualNumber) when cursor is on player and subtracting when its not. Then i am setting opacity of clones with profiles i wanna target to that variable. And now they show/hide with kinda like fade in/fade out effect.<br>  
+
+## Selecting specific clones for whatever  
+
+If you want to do something to clones outside of extension you need to pick them this way.  
+
+<img width="1174" height="169" alt="image" src="https://github.com/user-attachments/assets/39f0aa65-6bf7-4f5c-8ecd-fbf240c2db1d" />
+
+This condition allows you to target ones with specific profile but you will still need to use repeat for each object.  
+
+There is also delete clones action if you need it for whatever reason.
+
+That's pretty much it.
+Enjoy <('.'< )
