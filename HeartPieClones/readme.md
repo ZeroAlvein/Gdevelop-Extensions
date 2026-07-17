@@ -98,5 +98,5 @@ This condition allows you to target ones with specific profile but you will stil
 
 There is also delete clones action. Useful for when you want clones to show only at certain conditions (for example what i did to ones when you hover cursor over player).  
 
-That's pretty much it.
+That's pretty much it.  
 Enjoy <('.'< )
