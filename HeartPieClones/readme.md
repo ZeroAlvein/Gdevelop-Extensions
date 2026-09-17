@@ -1,6 +1,6 @@
 # HeartPieClones<br>  
 
-*Allows you to display frames of animation based on some number at any position in various ways  
+*Display sprite frames of animation based on some number at any position in various ways  
 For example hearts based on number variable (and more)*<br>  
 
 
