@@ -1,7 +1,7 @@
 # HeartPieClones<br>  
 
 *Display sprite frames of animation based on some number at any position in various ways  
-For example hearts based on number variable (and more)*<br>  
+For example hearts based on your health*<br>  
 
 
 Check it out in my [Test game](https://gd.games/instant-builds/37b76f97-d5d7-441e-ace8-a6dc0f87da03) try picking up fish.  
